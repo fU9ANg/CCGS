@@ -1,0 +1,14 @@
+
+message packet_test
+{
+    required uint32 uiValue = 1;
+    required int32  iValue  = 2;
+    required string sValue  = 3;
+}
+
+message packet_user_login
+{
+    required string sUserName = 1;
+    required string sPassword = 2;
+    required int32  iFlags = 3;
+}

@@ -1,4 +1,6 @@
 
+// deepdark
+
 #ifndef _CCGS_ATOMIC_H_
 #define _CCGS_ATOMIC_H_
 

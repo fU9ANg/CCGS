@@ -17,7 +17,6 @@ class Singleton
         CQueue<CommBuf*> recvQueue;
         CQueue<CommBuf*> sendQueue;
         CMemPool<CommBuf>  memPool;
-
     private:
         Singleton();
         static class Singleton* instance;

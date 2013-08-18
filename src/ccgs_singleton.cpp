@@ -22,3 +22,4 @@ Singleton::~Singleton ()
 {
     // TODO:
 }
+

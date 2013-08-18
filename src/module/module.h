@@ -1,6 +1,9 @@
 #ifndef __CCGS_MOD_H
 #define __CCGS_MOD_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #if defined (WINNT) || defined (WINDOWS)
 #define MODULE_ENTRY __declspec(dllexport)
 #else
@@ -23,42 +26,44 @@ typedef struct ccgs_commbuf {
     void *buf;
 }ccgs_commbuf_t;
 
-struct ccgs_module;
 /*
- * the module initialization function, which will be
- * called while module loaded.
- */
-typedef int (*ccgs_module_load)(struct ccgs_module*);
-
-/*
- * the core handler for requests from client,it's important 
- * to understant its the mechanism, it will be called while
- * a request arrived.
- */
-typedef int (*ccgs_module_handler)(struct ccgs_module*, ccgs_commbuf_t *buf);
-
-/*
- * the ccgs_module_exit performs some operations to release
- * resources allocated before.
+ * the core structure for each module to implement.
  */
 
-typedef void (*ccgs_module_unload)(struct ccgs_module*);
-
-
-/*
- * every module must impelment the following structure.
- */
 typedef struct ccgs_module {
     unsigned int mod_version;
-    void        *mod_private;
+    void         *mod_private;
+    /*
+     * the module initialization function, which will be
+     * called while module loaded.
+     */
+    int (*mod_load)(struct ccgs_module*);
 
-    ccgs_module_load    mod_load;
-    ccgs_module_handler mod_handler;
-    ccgs_module_unload  mod_unload;
+    /*
+     * the core handler for requests from client,it's important 
+     * to understant its the mechanism, it will be called while
+     * a request arrived.
+     */
+    int (*mod_handler)(struct ccgs_module*, ccgs_commbuf_t *buf);
+
+    /*
+     * the ccgs_module_exit performs some operations to release
+     * resources allocated before.
+     */
+
+    void (*mod_unload)(struct ccgs_module*);
 }ccgs_module_t;
 
+/*
+ * the export symbol of each module.
+ */
 #define CCGS_MODULE_SYMBOL "ccgs_module"
 
+
+
+/*
+ * use the following macro to define a module entry.
+ */
 #define DEFINE_CCGS_MODULE(_version, _mod_load, _mod_handler, _mod_unload) \
             ccgs_module_t MODULE_ENTRY ccgs_module = { \
                 .mod_version = _version, \
@@ -66,11 +71,14 @@ typedef struct ccgs_module {
                 .mod_load    = _mod_load, \
                 .mod_handler = _mod_handler, \
                 .mod_unload  = _mod_unload, \
-            };
+            }
 
-//allocate a memory for network communication.
-extern void* ccgs_mod_alloc_comm_buf (unsigned int *size);
+
+/*
+ * get a module with the module ID configured in the file.
+ */
 extern ccgs_module_t *ccgs_mod_get_module (unsigned int id);
+
 
 #ifdef __cplusplus
 }

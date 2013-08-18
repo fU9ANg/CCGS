@@ -212,3 +212,23 @@ void CModuleManager::removeModule (unsigned int id)
 {
     ST_hash_get_object (&this->hash_by_id, (void*)id);
 }
+
+
+
+/*
+ * the following a bunch of functions are using to allocate 
+ * memory and perform some operations for module.
+ */
+
+ccgs_module_t *ccgs_mod_get_module (unsigned int id)
+{
+    CModule *module = MODULE_MANAGER->getModule (id);
+
+    if (module) {
+        return module->m_module;
+    }
+
+    return NULL;
+}
+
+

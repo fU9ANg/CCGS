@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#include "module/ccgs_mod.h"
+#include "module/module.h"
 #include "SThash.h"
 
 using namespace std;

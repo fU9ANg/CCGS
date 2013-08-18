@@ -34,6 +34,8 @@ CModule::~CModule ()
 
 bool CModule::load (string name, unsigned int id)
 {
+    int ret;
+
     this->m_name = name;
     this->m_id   = id;
     this->m_handle = dlopen (name.c_str (), RTLD_LAZY);
@@ -41,7 +43,7 @@ bool CModule::load (string name, unsigned int id)
         return false;
     }
 
-    this->m_module = (ccgs_module_t*)dlsym (this->m_handle, "");
+    this->m_module = (ccgs_module_t*)dlsym (this->m_handle, CCGS_MODULE_SYMBOL);
     if (this->m_module == NULL) {
         dlclose (this->m_handle);
         return false;
@@ -49,6 +51,13 @@ bool CModule::load (string name, unsigned int id)
 #ifdef DEBUG
     printf ("load module [%s:%d] successfully.\n", name.c_str (), id);
 #endif
+    
+    ret = this->m_module->mod_load (this->m_module);
+    if (ret < 0) {
+        dlclose (this->m_handle);
+        return false;
+    }
+    
     return true;
 }
 
@@ -57,6 +66,10 @@ void CModule::unload ()
 #ifdef DEBUG
     printf ("unload module [%s:%d] successfully.\n", this->m_name.c_str (), this->m_id);
 #endif
+
+    if (this->m_module->mod_unload) {
+        this->m_module->mod_unload (this->m_module);
+    }
 
     if (this->m_handle) {
         dlclose (this->m_handle);

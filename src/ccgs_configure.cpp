@@ -70,7 +70,15 @@ void Config::Read (string file)
     lua_getglobal (lua,"module_list");
     module_list = lua_tostring (lua, -1);
 
-    lua_pop (lua, 7);
+    // memcached server address
+    lua_getglobal (lua, "mc_server");
+    mc_server = lua_tostring (lua, -1);
+
+    // memcached server port
+    lua_getglobal (lua, "mc_port");
+    mc_port = lua_tointeger (lua, -1);
+
+    lua_pop (lua, 9);
 
     lua_close (lua);
 

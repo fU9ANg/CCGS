@@ -39,6 +39,7 @@ SET (SRC_LIST
     ccgs_manager.cpp
     ccgs_send_task.cpp
     ccgs_thread_pool.cpp
+    ccgs_memcached.cpp
     ccgs_utils.c
 )
 

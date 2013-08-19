@@ -21,3 +21,9 @@ server_port=9999;
 -- ecServer IP
 server_ip="192.168.0.254";
 --server_ip="172.16.10.103";
+
+-- memcached server
+mc_server="172.16.10.103"
+
+-- memcached server port
+mc_port=11211

@@ -24,6 +24,10 @@ class Config
         string  server_ip;
         string  module_list;
 
+        // memcached config item of server 
+        string  mc_server;
+        int     mc_port;
+
         int     server_port;
 
     private:

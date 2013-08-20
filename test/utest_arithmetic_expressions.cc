@@ -13,7 +13,7 @@ TEST (Arithmetic_Expressions, EQ)
 TEST (Arithmetic_Expressions, NE)
 {
     int a = 10;
-    int b = 10;
+    int b = 11;
 
     ASSERT_NE (a, b);
 }
@@ -36,7 +36,7 @@ TEST (Arithmetic_Expressions, LE)
 
 TEST (Arithmetic_Expressions, GT)
 {
-    int a = 10;
+    int a = 11;
     int b = 10;
 
     ASSERT_GT (a, b);
@@ -45,7 +45,7 @@ TEST (Arithmetic_Expressions, GT)
 TEST (Arithmetic_Expressions, LT)
 {
     int a = 10;
-    int b = 10;
+    int b = 11;
 
     ASSERT_LT (a, b);
 }

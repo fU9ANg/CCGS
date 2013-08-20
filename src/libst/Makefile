@@ -10,4 +10,4 @@ ${LIB}:${OBJC}
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	rm ${OBJC} ${LIB}
+	rm -rf ${OBJC} ${LIB}

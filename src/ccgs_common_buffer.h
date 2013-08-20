@@ -86,7 +86,7 @@ public:
         return (*this);
     }
 
-private:
+public:
     void*   dataPtr;
     size_t  buffSize;
     size_t  usedSize;

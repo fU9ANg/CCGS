@@ -21,9 +21,12 @@ extern "C" {
 #endif
 
 typedef struct ccgs_commbuf {
-    int sockfd;
+    //int sockfd;
     unsigned int szbuf;
-    void *buf;
+    const void *bufptr;
+
+    /* don't touch it*/
+    const void *intrptr;
 }ccgs_commbuf_t;
 
 /*
@@ -79,7 +82,20 @@ typedef struct ccgs_module {
  */
 extern ccgs_module_t *ccgs_mod_get_module (unsigned int id);
 
+/*
+ *  allocate the memory used to send/receive data.
+ */
+extern ccgs_commbuf_t *ccgs_mod_alloc ();
 
+/*
+ * use it to free a memory allocated with ccgs_mod_alloc before.
+ */
+extern void ccgs_mod_free (ccgs_commbuf_t *);
+
+/*
+ * add data into send queue, 
+ */
+extern int ccgs_mod_add_into_queue (ccgs_commbuf_t *);
 #ifdef __cplusplus
 }
 #endif

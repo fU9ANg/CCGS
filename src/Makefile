@@ -36,21 +36,27 @@ OBJS    = 	ccgs.o \
 			ccgs_send_task.o \
 			ccgs_thread_pool.o \
 			ccgs_utils.o \
-			ccgs_memcached.o
+			ccgs_memcached.o \
+			ccgs_module.o
+
 
 # binary
 BIN	    = ccgs
 
 # where are include files kept
-INC	    = -I. -I./includes -I./message
+INC	    = -I. -I./includes -I./message -I./libst -I./module
 
 # for Linker
 #LINK        = libs/libev.a libs/libglog.a libs/liblua52.so libs/libmysqlcppconn.so libs/libmemcached.so
 LINK        = -lev -lglog -lmysqlcppconn -llua5.2 -lmemcached -lprotobuf -lpthread \
-              -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt
+              -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt \
+              libst/libst.a
 # rock..
-all: clean precompile_protobuf $(BIN)
 
+all: clean libst.a precompile_protobuf $(BIN)
+
+libst.a:
+	cd libst && make
 # pre-compile protobuf
 precompile_protobuf:
 	$(PROTOC) $(PBFLAGS)=$(PBDST) $(PBSRC)/*
@@ -70,3 +76,4 @@ $(BIN):$(OBJS)
 
 clean:
 	-rm -rf $(OBJS) $(BIN) *~ logs .lock message/*
+	cd ./libst/ && make clean

@@ -2,8 +2,9 @@
 #include <string.h>
 #include <dlfcn.h>
 
+#include "ccgs_common_buffer.h"
+#include "ccgs_manager.h"
 #include "ccgs_module.h"
-
 
 
 /*
@@ -231,4 +232,47 @@ ccgs_module_t *ccgs_mod_get_module (unsigned int id)
     return NULL;
 }
 
+ccgs_commbuf_t *ccgs_mod_alloc ()
+{
+    ccgs_commbuf_t *commbuf = NULL;
+    CommBuf *buf = NULL;
+
+    buf = (CommBuf*)SINGLETON->memPool.Malloc ();
+    if (buf == NULL) {
+        return NULL;
+    }
+
+    commbuf = (ccgs_commbuf_t*)calloc (1, sizeof (ccgs_commbuf_t));
+    if (commbuf == NULL) {
+        SINGLETON->memPool.Free (buf);
+        return NULL;
+    }
+
+    commbuf->intrptr = buf;
+    commbuf->szbuf   = buf->buffSize;
+    commbuf->bufptr  = buf->dataPtr;
+    return commbuf;
+}
+
+void ccgs_mod_free (ccgs_commbuf_t *buf)
+{
+    CommBuf *combuf = (CommBuf*)buf->intrptr;
+
+    SINGLETON->memPool.Free (combuf);
+    free (buf);
+}
+
+int ccgs_mod_add_into_queue (ccgs_commbuf_t *combuf)
+{
+    CommBuf *buf  = NULL;
+
+    buf = (CommBuf*)combuf->intrptr;
+
+    if (SINGLETON->sendQueue.InQueue (buf) < 0) {
+        return -1;
+    }
+
+    free (combuf);
+    return 0;
+}
 

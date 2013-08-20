@@ -22,13 +22,16 @@ CMACRO	=
 # objects
 OBJS    = 	gtest_main.o \
 			utest_arithmetic_expressions.o \
-			utest_lib_event.o
+			utest_lib_event.o \
+			utest_common_buffer.o \
+			utest_configure.o \
+			../src/ccgs_configure.o
 
 # binary
 BIN	    = unitest
 
 # where are include files kept
-INC	    = -I. -I../src/include -I../src/
+INC	    = -I. -I../src/includes -I../src/
 
 # for Linker
 #LINK        = libs/libev.a libs/libglog.a libs/liblua52.so libs/libmysqlcppconn.so libs/libmemcached.so

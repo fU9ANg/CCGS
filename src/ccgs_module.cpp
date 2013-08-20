@@ -215,6 +215,7 @@ void CModuleManager::removeModule (unsigned int id)
 }
 
 
+#include "ccgs_singleton.h"
 
 /*
  * the following a bunch of functions are using to allocate 
@@ -223,7 +224,7 @@ void CModuleManager::removeModule (unsigned int id)
 
 ccgs_module_t *ccgs_mod_get_module (unsigned int id)
 {
-    CModule *module = MODULE_MANAGER->getModule (id);
+    CModule *module = SINGLETON->moduleManager.getModule (id);
 
     if (module) {
         return module->m_module;

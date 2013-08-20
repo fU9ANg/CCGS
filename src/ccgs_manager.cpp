@@ -12,6 +12,33 @@ CManager::~CManager ()
     // TODO:
 }
 
+bool CManager::InitSystemManager ()
+{
+    //initialize module manager.
+    if (!SINGLETON->moduleManager.init ()) {
+        printf ("[ERROR] -- Module: Initialized modules failed.\n");
+        return false;
+    }
+
+    //load all modules configuraed in file.
+    if (!SINGLETON->moduleManager.load (CONFIG->module_list)) {
+        SINGLETON->moduleManager.uninit ();
+        printf ("[ERROR] -- Module: load modules failed.\n");
+        return false;
+    }
+
+    return true;
+}
+
+void CManager::ReleaseSystem ()
+{
+    //unload all modules.
+    SINGLETON->moduleManager.unload ();
+
+    //clean all resources used to manage modules.
+    SINGLETON->moduleManager.uninit ();
+}
+
 int CManager::Process (int argc, char** argv)
 {
     signal (SIGINT,  SIG_IGN);
@@ -50,6 +77,7 @@ int CManager::Process (int argc, char** argv)
             google::SetStderrLogging  (google::ERROR + 1);
             CONFIG->Read (CONFIGFILE);
 
+            //connect to database.
             if (!DATABASE->Init(CONFIG->db_host, \
                                 CONFIG->db_username, \
                                 CONFIG->db_password, \
@@ -59,8 +87,13 @@ int CManager::Process (int argc, char** argv)
                 return 0;
             }
 
+            if (!this->InitSystemManager ()) {
+                return -1;
+            }
             // RUN
             this->Run ();
+
+            this->ReleaseSystem ();
             break;
     case 'u':
         if (true == Lock (LOCK_NOWAIT))

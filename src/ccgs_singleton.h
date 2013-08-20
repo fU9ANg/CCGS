@@ -7,6 +7,7 @@
 #include "ccgs_common_queue.h"
 #include "ccgs_mem_pool.h"
 #include "ccgs_common_buffer.h"
+#include "ccgs_module.h"
 
 class Singleton 
 {
@@ -17,6 +18,7 @@ class Singleton
         CQueue<CommBuf*> recvQueue;
         CQueue<CommBuf*> sendQueue;
         CMemPool<CommBuf>  memPool;
+        CModuleManager   moduleManager;
     private:
         Singleton();
         static class Singleton* instance;

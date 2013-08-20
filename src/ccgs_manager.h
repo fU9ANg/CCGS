@@ -37,6 +37,9 @@ class CManager
         static void SigHandler (int signo);
 
     private:
+        bool InitSystemManager ();
+        void ReleaseSystem ();
+    private:
         bool Lock (int mode);
         CThreadPool* threadPool;
         int          fileLock;

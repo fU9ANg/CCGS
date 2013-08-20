@@ -25,6 +25,7 @@ OBJS    = 	gtest_main.o \
 			utest_common_buffer.o \
 			utest_configure.o \
 			utest_db_connection.o \
+			utest_mem_pool.o \
 			../src/ccgs_configure.o \
 			../src/ccgs_db_connection.o
 

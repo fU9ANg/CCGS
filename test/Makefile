@@ -17,7 +17,6 @@ CDEBUG  = -g
 
 # macro
 CMACRO	= 
-#-D_OLD_MAKEHOUSE_GAME
 
 # objects
 OBJS    = 	gtest_main.o \
@@ -25,7 +24,9 @@ OBJS    = 	gtest_main.o \
 			utest_lib_event.o \
 			utest_common_buffer.o \
 			utest_configure.o \
-			../src/ccgs_configure.o
+			utest_db_connection.o \
+			../src/ccgs_configure.o \
+			../src/ccgs_db_connection.o
 
 # binary
 BIN	    = unitest

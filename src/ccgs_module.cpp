@@ -217,63 +217,48 @@ void CModuleManager::removeModule (unsigned int id)
 
 #include "ccgs_singleton.h"
 
-/*
- * the following a bunch of functions are using to allocate 
- * memory and perform some operations for module.
- */
-
-ccgs_module_t *ccgs_mod_get_module (unsigned int id)
+ccgs_sockbuf_t *ccgs_sockbuf_alloc (unsigned int size)
 {
-    CModule *module = SINGLETON->moduleManager.getModule (id);
+    ccgs_sockbuf_t  *skbuf = NULL;
+    CommBuf         *combuf= NULL;
 
-    if (module) {
-        return module->m_module;
-    }
-
-    return NULL;
-}
-
-ccgs_commbuf_t *ccgs_mod_alloc ()
-{
-    ccgs_commbuf_t *commbuf = NULL;
-    CommBuf *buf = NULL;
-
-    buf = (CommBuf*)SINGLETON->memPool.Malloc ();
-    if (buf == NULL) {
+    skbuf = (ccgs_sockbuf_t*)calloc (1, sizeof (ccgs_sockbuf_t));
+    if (skbuf == NULL) {
         return NULL;
     }
 
-    commbuf = (ccgs_commbuf_t*)calloc (1, sizeof (ccgs_commbuf_t));
-    if (commbuf == NULL) {
-        SINGLETON->memPool.Free (buf);
-        return NULL;
-    }
+    combuf = new CommBuf (size);
+    skbuf->length = size;
+    skbuf->buffer = combuf->dataPtr;
+    skbuf->intrptr= combuf;
+    skbuf->sockfd = -1;
 
-    commbuf->intrptr = buf;
-    commbuf->szbuf   = buf->buffSize;
-    commbuf->bufptr  = buf->dataPtr;
-    return commbuf;
+    return skbuf;
 }
 
-void ccgs_mod_free (ccgs_commbuf_t *buf)
+void ccgs_sockbuf_free (ccgs_sockbuf_t *skbuf)
 {
-    CommBuf *combuf = (CommBuf*)buf->intrptr;
+    CommBuf *combuf = (CommBuf*)skbuf->intrptr;
 
-    SINGLETON->memPool.Free (combuf);
-    free (buf);
-}
-
-int ccgs_mod_add_into_queue (ccgs_commbuf_t *combuf)
-{
-    CommBuf *buf  = NULL;
-
-    buf = (CommBuf*)combuf->intrptr;
-
-    if (SINGLETON->sendQueue.InQueue (buf) < 0) {
-        return -1;
+    if (combuf) {
+        delete combuf;
     }
 
-    free (combuf);
+    free (skbuf);
+}
+
+int ccgs_add_into_queue (ccgs_sockbuf_t *skbuf)
+{
+    if (skbuf->intrptr) {
+        /*
+         * the buffer will be released automatically,so
+         * we don't release anymore here,just assign empty
+         * pointer to it.
+         */
+        SINGLETON->sendQueue.InQueue ((CommBuf*)skbuf->intrptr);
+        skbuf->intrptr = NULL;
+    }
+
     return 0;
 }
 

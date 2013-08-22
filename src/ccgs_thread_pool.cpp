@@ -93,7 +93,7 @@ int CThreadPool::Kill ()
 
 void CThreadPool::SigHandler (int signo)
 {
-    printf ("[%ld]exit\n", pthread_self ());
+    printf ("[%ld]exit\n", (long unsigned int)pthread_self ());
     pthread_exit (NULL);
     return;
 }

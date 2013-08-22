@@ -8,7 +8,9 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
+#ifdef LINUX
 #include <sys/epoll.h>
+#endif
 #include <sys/errno.h>
 #include <sys/fcntl.h>
 #include <list>

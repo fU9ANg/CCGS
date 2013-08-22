@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 
-#include "module/module.h"
-#include "SThash.h"
+#include "devel/CCGS_module.h"
+#include "libst/SThash.h"
 
 using namespace std;
 

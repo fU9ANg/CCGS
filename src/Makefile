@@ -10,7 +10,7 @@ PBSRC   = ./protos
 PBDST   = ./message
 
 # which c plus plus compiler
-CPP     = ccache g++
+CPP     = ccache c++
 
 # which c compiler
 CC      = ccache cc
@@ -43,17 +43,19 @@ OBJS    = 	ccgs.o \
 # binary
 BIN	    = ccgs
 
+# CCGS library for developer
+LIBCCGS     = libccgs.so
 # where are include files kept
-INC	    = -I. -I./includes -I./message -I./libst -I./module
+INC	    = -I. -I./includes -I./message
 
 # for Linker
 #LINK        = libs/libev.a libs/libglog.a libs/liblua52.so libs/libmysqlcppconn.so libs/libmemcached.so
-LINK        = -lev -lglog -lmysqlcppconn -llua5.2 -lmemcached -lprotobuf -lpthread \
+LINK        = -lev -lglog -lmysqlcppconn -llua-5.2 -lmemcached -lprotobuf -lpthread \
               -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt \
               libst/libst.a
 # rock..
 
-all: clean libst.a precompile_protobuf $(BIN)
+all: clean libst.a precompile_protobuf ${LIBCCGS} $(BIN)
 
 libst.a:
 	cd libst && make
@@ -61,6 +63,9 @@ libst.a:
 precompile_protobuf:
 	$(PROTOC) $(PBFLAGS)=$(PBDST) $(PBSRC)/*
 
+# build CCGS shared library.
+${LIBCCGS}: ${OBJS}
+	${CC} ${OBJS} -shared -fPIC -o ${LIBCCGS}
 # how to compiling programs
 $(BIN):$(OBJS)
 #	$(CPP) $(CFLAGS) $(CDEBUG) -o $@ $(OBJS)
@@ -75,5 +80,5 @@ $(BIN):$(OBJS)
 .PHONY: clean
 
 clean:
-	-rm -rf $(OBJS) $(BIN) *~ logs .lock message/*
+	-rm -rf $(OBJS) $(BIN) *~ logs .lock message/* ${LIBCCGS}
 	cd ./libst/ && make clean

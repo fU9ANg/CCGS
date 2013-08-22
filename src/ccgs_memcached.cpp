@@ -1,4 +1,4 @@
-
+#include <string.h>
 #include "ccgs_memcached.h"
 #include "ccgs_configure.h"
 

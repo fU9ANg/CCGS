@@ -192,7 +192,7 @@ bool CModuleManager::load (string modcfg)
         } else {
             ST_hash_add_object (&this->hash_by_id, 
                                 (void*)module, 
-                                (void*)modid);
+                                (void*)(unsigned long)modid);
         }
     } while ((sepstr = strtok (NULL, ", ")));
 
@@ -209,7 +209,7 @@ void CModuleManager::unload ()
     if (mod_list) {
         for (i=0; i<num; i++) {
             module = (CModule*)mod_list[i];
-            ST_hash_remove_object (&this->hash_by_id, (void*)module->m_id);
+            ST_hash_remove_object (&this->hash_by_id, (void*)(unsigned long)module->m_id);
         }
         free (mod_list);
     }
@@ -218,17 +218,17 @@ void CModuleManager::unload ()
 CModule* CModuleManager::getModule (unsigned int id)
 {
     return (CModule*)ST_hash_get_object (&this->hash_by_id, 
-                                         (void*)id);
+                                         (void*)(unsigned long)id);
 }
 
 void CModuleManager::removeModule (unsigned int id)
 {
-    ST_hash_get_object (&this->hash_by_id, (void*)id);
+    ST_hash_get_object (&this->hash_by_id, (void*)(unsigned long)id);
 }
 
 void CModuleManager::addMBufferIntoQueue (void *buf, unsigned int mid)
 {
-    ST_hash_add_object (&this->hash_buf_queue, buf, (void*)mid);
+    ST_hash_add_object (&this->hash_buf_queue, buf, (void*)(unsigned long)mid);
 }
 
 CQueue<void*> *CModuleManager::getMBufferQueue (unsigned int mid)
@@ -237,10 +237,10 @@ CQueue<void*> *CModuleManager::getMBufferQueue (unsigned int mid)
          *databuf = NULL;
     CQueue<void*> *queue = new CQueue<void*>;
 
-    databuf = ST_hash_next_object (&this->hash_buf_queue, (void*)mid, &saveptr);
+    databuf = ST_hash_next_object (&this->hash_buf_queue, (void*)(unsigned long)mid, &saveptr);
     while (databuf) {
         queue->InQueue (databuf);
-        databuf = ST_hash_next_object (NULL, (void*)mid, &saveptr);
+        databuf = ST_hash_next_object (NULL, (void*)(unsigned long)mid, &saveptr);
     }
 
     return queue;

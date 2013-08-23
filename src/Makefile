@@ -16,7 +16,7 @@ CPP     = ccache c++
 CC      = ccache cc
 
 # options for compiler
-CFLAGS  = -Wall -Werror
+CFLAGS  = -Wall -Werror -fPIC
 
 # is debug? (for development)
 CDEBUG  = -g
@@ -69,7 +69,7 @@ ${LIBCCGS}: ${OBJS}
 $(BIN):$(LIBCCGS)
 #	$(CPP) $(CFLAGS) $(CDEBUG) -o $@ $(OBJS)
 #	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) -o $@ $(OBJS) $(LIBA) $(LINK)
-	${CPP} -L./ ${LINK} ccgs.cpp -o $(BIN)
+	${CPP} -L./ ${LINK} ccgs.cpp -o $(BIN) $(INC)
 %.o:%.cpp
 	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<
 %.o:%.cc

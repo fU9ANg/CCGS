@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#include "ccgs_common_queue.h"
+
 #include "devel/CCGS_module.h"
 #include "libst/SThash.h"
 
@@ -35,6 +37,7 @@ public:
 
 class CModuleManager {
 private:
+    ST_hash_t  hash_buf_queue;
     ST_hash_t  hash_by_id;
     static class CModuleManager *instance;    
 public:
@@ -55,6 +58,10 @@ public:
 
     CModule *getModule (unsigned int id);
     void     removeModule (unsigned int id);
+
+    void    addMBufferIntoQueue (void*, unsigned int mid);
+
+    CQueue<void*> *getMBufferQueue (unsigned int mid);
 };
 
 #define MODULE_MANAGER  CModuleManager::sharedInstance()

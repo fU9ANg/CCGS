@@ -1,0 +1,8 @@
+MODULE=mymodule.so
+CC=gcc
+CFLAGS=-Wall -L../ -lccgs -fPIC -shared
+
+all:${MODULE}
+
+${MODULE}:sample.c
+	${CC} ${CFLAGS} sample.c -o ${MODULE}

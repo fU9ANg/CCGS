@@ -1,5 +1,6 @@
 
 #include "ccgs_recv_task.h"
+#include "ccgs_protocol_handler.h"
 
 RecvTask::RecvTask ()
 {
@@ -24,6 +25,9 @@ int RecvTask::DoWork ()
             cout << "ERROR: p==NULL in RecvTask::work()" << endl;
             return (0);
         }
+
+        //process request from remote.
+        CProtocolHandler::handle (p);
 #if 0
         MSG_HEAD* head = (MSG_HEAD*) p->ptr();
         if (head != NULL)

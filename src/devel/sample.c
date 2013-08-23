@@ -1,6 +1,10 @@
-#include "module.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int ccgs_module_load (ccgs_module_t *mod)
+#include "CCGS_module.h"
+
+static int ccgs_module_load (ccgs_module_t *mod, unsigned int mid)
 {
     void *data = malloc (10);
     mod->mod_private = data;
@@ -8,26 +12,17 @@ int ccgs_module_load (ccgs_module_t *mod)
     return 0;
 }
 
-int ccgs_module_handler (ccgs_module_t *mod, ccgs_commbuf_t *cmmbuf)
+static int ccgs_module_handler (ccgs_module_t *mod, ccgs_sockbuf_t *skbuf)
 {
-    void *data = cmmbuf->bufptr;
-    unsigned int szbuf = cmmbuf->szbuf;
-    ccgs_commbuf_t *newbuf = NULL;
+    printf ("Reiceive data[size: %d]: %s\n",skbuf->data_length, (char*)skbuf->buffer);
 
-    /*use this way to allocate a new network buffer.*/
-    newbuf = ccgs_mod_alloc ();
+    strcpy ((char*)skbuf->buffer,"This is response from server.\n");
 
-
-    //TODO: add code here to handle the request from client.
-
-    ccgs_mod_add_send_queue (newbuf);
-
-    ccgs_mod_free (cmmbuf);
-
+    ccgs_add_into_queue (skbuf);
     return 0;
 }
 
-void ccgs_module_unload (ccgs_module_t *mod)
+static void ccgs_module_unload (ccgs_module_t *mod)
 {
     if (mod->mod_private) {
         free (mod->mod_private);

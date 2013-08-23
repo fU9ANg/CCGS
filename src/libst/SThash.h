@@ -36,8 +36,8 @@ extern int ST_hash_init (ST_hash_t *hash,
 extern int ST_hash_add_object (ST_hash_t *hash, void *data, void *key);
 extern void ST_hash_remove_object (ST_hash_t *hash, void *key);
 extern void *ST_hash_get_object (ST_hash_t *hash, void *key);
-extern ST_hash_node_t *ST_hash_get_node (ST_hash_t *hash, void *key);
-
+//extern ST_hash_node_t *ST_hash_get_node (ST_hash_t *hash, void *key);
+extern void *ST_hash_next_object (ST_hash_t *hash, void *key, void **ptr);
 extern void **ST_hash_list (ST_hash_t *hash, int *num);
 extern void ST_hash_remove_all_objects (ST_hash_t *hash);
 extern void ST_hash_release (ST_hash_t *hash);

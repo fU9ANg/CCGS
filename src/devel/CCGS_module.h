@@ -20,10 +20,14 @@
 extern "C" {
 #endif
 
+
+#include "CCGS_proto.h"
+
 typedef struct ccgs_sockbuf {
-    int sockfd;
-    unsigned int length;
-    void *buffer;
+    ccgs_header_t *header;
+    void          *buffer;
+    unsigned int  size;
+    unsigned int  data_length;
 
     /* don't touch it*/
     const void *intrptr;
@@ -40,7 +44,7 @@ typedef struct ccgs_module {
      * the module initialization function, which will be
      * called while module loaded.
      */
-    int (*mod_load)(struct ccgs_module*);
+    int (*mod_load)(struct ccgs_module*, unsigned int);
 
     /*
      * the core handler for requests from client,it's important 

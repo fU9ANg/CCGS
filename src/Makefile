@@ -26,7 +26,7 @@ CMACRO	=
 #-D_OLD_MAKEHOUSE_GAME
 
 # objects
-OBJS    = 	ccgs.o \
+OBJS    =		ccgs_module.o \
 			ccgs_configure.o \
 			ccgs_event_loop.o  \
 			ccgs_recv_task.o  \
@@ -36,8 +36,7 @@ OBJS    = 	ccgs.o \
 			ccgs_send_task.o \
 			ccgs_thread_pool.o \
 			ccgs_utils.o \
-			ccgs_memcached.o \
-			ccgs_module.o
+			ccgs_memcached.o
 
 
 # binary
@@ -51,8 +50,7 @@ INC	    = -I. -I./includes -I./message
 # for Linker
 #LINK        = libs/libev.a libs/libglog.a libs/liblua52.so libs/libmysqlcppconn.so libs/libmemcached.so
 LINK        = -lev -lglog -lmysqlcppconn -llua-5.2 -lmemcached -lprotobuf -lpthread \
-              -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt \
-              libst/libst.a
+              -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt -lccgs
 # rock..
 
 all: clean libst.a precompile_protobuf ${LIBCCGS} $(BIN)
@@ -65,11 +63,13 @@ precompile_protobuf:
 
 # build CCGS shared library.
 ${LIBCCGS}: ${OBJS}
-	${CC} ${OBJS} -shared -fPIC -o ${LIBCCGS}
+	${CC} ${OBJS} -shared -fPIC -o ${LIBCCGS} libst/libst.a
 # how to compiling programs
-$(BIN):$(OBJS)
+#$(BIN):$(OBJS)
+$(BIN):$(LIBCCGS)
 #	$(CPP) $(CFLAGS) $(CDEBUG) -o $@ $(OBJS)
-	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) -o $@ $(OBJS) $(LIBA) $(LINK)
+#	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) -o $@ $(OBJS) $(LIBA) $(LINK)
+	${CPP} -L./ ${LINK} ccgs.cpp -o $(BIN)
 %.o:%.cpp
 	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<
 %.o:%.cc

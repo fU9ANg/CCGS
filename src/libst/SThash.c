@@ -53,6 +53,7 @@ int ST_hash_add_object (ST_hash_t *hash, void *data, void *key)
     return 0;
 }
 
+static ST_hash_node_t *ST_hash_get_node (ST_hash_t*, void*);
 void ST_hash_remove_object (ST_hash_t *hash, void *key)
 {
     ST_hash_node_t *node = NULL,
@@ -80,7 +81,7 @@ void ST_hash_remove_object (ST_hash_t *hash, void *key)
     }
 }
 
-ST_hash_node_t *ST_hash_get_node (ST_hash_t *hash, void *key)
+static ST_hash_node_t *ST_hash_get_node (ST_hash_t *hash, void *key)
 {
     unsigned int idx = 0;
     ST_hash_node_t *node = NULL;
@@ -104,6 +105,25 @@ void *ST_hash_get_object (ST_hash_t *hash, void *key)
 
     node = ST_hash_get_node (hash, key);
     return node?node->data:NULL;
+}
+
+void *ST_hash_next_object (ST_hash_t *hash, void *key,void **ptr)
+{
+    ST_hash_node_t *nodeptr = NULL;
+    unsigned int idx = 0;
+
+    if (hash) {
+        idx = (hash->hash_index?hash->hash_index (key):idx);
+        nodeptr = hash->table[idx % hash->size].link.next;
+    } else {
+        nodeptr = *ptr;
+    }
+
+    if (nodeptr) {
+        *ptr = nodeptr->link.next;
+    }
+
+    return nodeptr?nodeptr->data:NULL;
 }
 
 void **ST_hash_list (ST_hash_t *hash, int *num)

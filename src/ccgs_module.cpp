@@ -2,10 +2,9 @@
 #include <string.h>
 #include <dlfcn.h>
 
-#include "ccgs_common_buffer.h"
 #include "ccgs_manager.h"
+#include "ccgs_common_buffer.h"
 #include "ccgs_module.h"
-
 
 /*
 static char *getModuleInfo (char *modstr, unsigned int *mid)
@@ -53,7 +52,7 @@ bool CModule::load (string name, unsigned int id)
     printf ("load module [%s:%d] successfully.\n", name.c_str (), id);
 #endif
     
-    ret = this->m_module->mod_load (this->m_module);
+    ret = this->m_module->mod_load (this->m_module, id);
     if (ret < 0) {
         dlclose (this->m_handle);
         return false;
@@ -90,7 +89,9 @@ void CModule::unload ()
  */
 static unsigned int hash_index_by_id (void *key)
 {
-    return (unsigned int)key;
+    unsigned long ikey = (unsigned long)key;
+
+    return (unsigned int)ikey;
 }
 
 /*
@@ -99,8 +100,9 @@ static unsigned int hash_index_by_id (void *key)
 static BOOL hash_compare_by_id (void *data, void *key)
 {
     CModule *module = (CModule*)data;
+    unsigned long ikey = (unsigned long)key;
 
-    if (module->m_id == (unsigned int)key) {
+    if (module->m_id == (unsigned int)ikey) {
         return TRUE;
     }
 
@@ -149,12 +151,22 @@ bool CModuleManager::init ()
         return false;
     }
 
+    ret = ST_hash_init (&this->hash_buf_queue,
+                        10,
+                        hash_index_by_id,
+                        hash_compare_by_id,
+                        NULL);
+
+    if (ret < 0) {
+        return false;
+    }
     return true;
 }
 
 void CModuleManager::uninit ()
 {
     ST_hash_release (&this->hash_by_id);
+    ST_hash_release (&this->hash_buf_queue);
 }
 
 bool CModuleManager::load (string modcfg)
@@ -214,6 +226,25 @@ void CModuleManager::removeModule (unsigned int id)
     ST_hash_get_object (&this->hash_by_id, (void*)id);
 }
 
+void CModuleManager::addMBufferIntoQueue (void *buf, unsigned int mid)
+{
+    ST_hash_add_object (&this->hash_buf_queue, buf, (void*)mid);
+}
+
+CQueue<void*> *CModuleManager::getMBufferQueue (unsigned int mid)
+{
+    void *saveptr = NULL,
+         *databuf = NULL;
+    CQueue<void*> *queue = new CQueue<void*>;
+
+    databuf = ST_hash_next_object (&this->hash_buf_queue, (void*)mid, &saveptr);
+    while (databuf) {
+        queue->InQueue (databuf);
+        databuf = ST_hash_next_object (NULL, (void*)mid, &saveptr);
+    }
+
+    return queue;
+}
 
 #include "ccgs_singleton.h"
 
@@ -221,18 +252,24 @@ ccgs_sockbuf_t *ccgs_sockbuf_alloc (unsigned int size)
 {
     ccgs_sockbuf_t  *skbuf = NULL;
     CommBuf         *combuf= NULL;
+    void            *bufptr= NULL;
 
     skbuf = (ccgs_sockbuf_t*)calloc (1, sizeof (ccgs_sockbuf_t));
     if (skbuf == NULL) {
         return NULL;
     }
 
-    combuf = new CommBuf (size);
-    skbuf->length = size;
-    skbuf->buffer = combuf->dataPtr;
-    skbuf->intrptr= combuf;
-    skbuf->sockfd = -1;
+    combuf = new CommBuf (size + SZCCGSHDR);
+    bufptr = combuf->dataPtr;
 
+    skbuf->intrptr= combuf;
+
+    skbuf->header = (ccgs_header_t*)bufptr;
+    skbuf->buffer = (char*)bufptr + SZCCGSHDR;
+    skbuf->size   = size;
+    skbuf->data_length = 0;
+
+    memcpy (skbuf->header->identifier, CCGS_IDENTIFIER, 4);
     return skbuf;
 }
 
@@ -247,8 +284,9 @@ void ccgs_sockbuf_free (ccgs_sockbuf_t *skbuf)
     free (skbuf);
 }
 
-int ccgs_add_into_queue (ccgs_sockbuf_t *skbuf)
+int ccgs_add_into_queue (ccgs_sockbuf_t *skbuf, unsigned int mid)
 {
+#if 0
     if (skbuf->intrptr) {
         /*
          * the buffer will be released automatically,so
@@ -258,7 +296,10 @@ int ccgs_add_into_queue (ccgs_sockbuf_t *skbuf)
         SINGLETON->sendQueue.InQueue ((CommBuf*)skbuf->intrptr);
         skbuf->intrptr = NULL;
     }
-
+#endif
+    if (skbuf) {
+        SINGLETON->moduleManager.addMBufferIntoQueue ((void*)skbuf, mid);
+    }
     return 0;
 }
 

@@ -1,6 +1,6 @@
 LIB=libst.a
 OBJC=STnotification.o SThash.o
-CFLAGS=-Wall -g
+CFLAGS=-Wall -g -fPIC
 CC=cc
 
 

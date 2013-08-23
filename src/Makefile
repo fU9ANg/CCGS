@@ -80,5 +80,5 @@ $(BIN):$(LIBCCGS)
 .PHONY: clean
 
 clean:
-	-rm -rf $(OBJS) $(BIN) *~ logs .lock message/* ${LIBCCGS}
+	-rm -rf *.o $(BIN) *~ logs .lock message/* ${LIBCCGS}
 	cd ./libst/ && make clean

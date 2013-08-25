@@ -30,8 +30,8 @@ int CEvLoop::StartListen ()
 {
     struct sockaddr_in servaddr;
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr (m_ip.c_str ());
-    //inet_pton  (AF_INET, m_ip.c_str (), &servaddr.sin_addr.s_addr);
+    //servaddr.sin_addr.s_addr = inet_addr (m_ip.c_str ());
+    inet_pton  (AF_INET, m_ip.c_str (), &servaddr.sin_addr.s_addr);
     //servaddr.sin_addr.s_addr = htonl  (INADDR_ANY);
     servaddr.sin_port = htons (m_port);
 
@@ -126,6 +126,7 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
         return;
     }
 
+    cout << "recv len of header......." << endl;
     //收包头长度
     int i = recv_v (w->fd, buf->Data (), MSG_HEADER_LEN);
     if (MSG_HEADER_LEN != (unsigned int)i)
@@ -137,21 +138,25 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
         return;
     }
 
+    cout << "recv body of message" << endl;
     //收包体
     //int *p = (int*)buf->Data ();
     int p = *(int*)buf->Data ();
+    cout << "recv len of header=" << p << endl;
     buf->Reset ();
     i = recv_v (w->fd, (char*)buf->Data (), p - MSG_HEADER_LEN);
 
     if ((p - MSG_HEADER_LEN) != i)
     {
-        LOG (ERROR) << w->fd << ":recv body error! hope = " << p << " actually received len = " << i 
+        LOG (ERROR) << w->fd << ":recv body error! hope = " << p - MSG_HEADER_LEN << " actually received len = " << i 
             << " info = " << strerror (errno) << endl;
         SINGLETON->memPool.Free (buf);
         CEvLoop::CloseFD (w->fd);
         return;
     }
 
+    cout << (char*)buf->Data () << endl;
+    cout << "push message to queue" << endl;
     CEvLoop::ioarray[w->fd].lasttime = ev_time ();
     buf->SetSocket (w->fd);
     //将buf压入队列

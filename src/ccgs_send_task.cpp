@@ -32,8 +32,11 @@ int SendTask::DoWork ()
 
         }
 
-
-        if (p->UsedSize() != (unsigned int)send_v (fd, p->Data(), p->UsedSize()))
+        cout << p->Data () << endl;
+        cout << p->UsedSize () << endl;
+        unsigned int send_len =  (unsigned int)send_v (fd, p->Data(), p->UsedSize());
+        cout << "send len = " << send_len << endl;
+        if (p->UsedSize() != send_len)
         {
             printf ("[ERROR]: send body of message.\n");
         }

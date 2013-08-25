@@ -24,7 +24,7 @@ public:
         skbuf->header  = (ccgs_header_t*)buf->dataPtr;
         skbuf->buffer  = (char*)buf->dataPtr + SZCCGSHDR;
         skbuf->size    = buf->buffSize;
-        skbuf->data_length = buf->usedSize;
+        skbuf->data_length = buf->usedSize-SZCCGSHDR;
 
         if (module == NULL ||
             module->m_id != skbuf->header->MID) {

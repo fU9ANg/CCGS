@@ -36,7 +36,8 @@ OBJS    =		ccgs_module.o \
 			ccgs_send_task.o \
 			ccgs_thread_pool.o \
 			ccgs_utils.o \
-			ccgs_memcached.o
+			ccgs_memcached.o \
+			ccgs_common.o
 
 
 # binary

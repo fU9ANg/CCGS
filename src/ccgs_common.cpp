@@ -40,7 +40,8 @@ unsigned int ccgs_send_data (int skfd,
 
 void *ccgs_make_buffer (unsigned int MID,
                         const void *data,
-                        unsigned int size)
+                        unsigned int size,
+                        unsigned int *retsz)
 {
     ccgs_header_t *ccgs_hdr = NULL;
     void      *buffer = NULL;
@@ -57,6 +58,8 @@ void *ccgs_make_buffer (unsigned int MID,
         ccgs_hdr->length = size;
         
         memcpy ((char*)buffer + SZCCGSHDR, data, size);
+
+        *retsz = size + SZCCGSHDR;
     }
 
     return buffer;

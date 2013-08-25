@@ -140,6 +140,7 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
     //收包体
     //int *p = (int*)buf->Data ();
     int p = *(int*)buf->Data ();
+    buf->Reset ();
     i = recv_v (w->fd, (char*)buf->Data (), p - MSG_HEADER_LEN);
 
     if ((p - MSG_HEADER_LEN) != i)

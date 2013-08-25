@@ -56,7 +56,9 @@ public:
                         sndbuf->header->flags  = 0;
                         sndbuf->header->length = sndbuf->data_length;
                        
-                        comBuf->socketFd         = buf->socketFd;
+                        if (comBuf->socketFd <= 0) {
+                            comBuf->socketFd         = buf->socketFd;
+                        }
                         comBuf->usedSize       = SZCCGSHDR + sndbuf->header->length;
 
                         SINGLETON->sendQueue.InQueue (comBuf);

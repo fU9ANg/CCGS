@@ -9,6 +9,7 @@ extern "C" {
 #endif
 
 
+#include "CCGS_module.h"
 #include "CCGS_proto.h"
 
 /*
@@ -51,8 +52,7 @@ extern unsigned int ccgs_send_data (int skfd,
 
 extern void *ccgs_make_buffer (unsigned int MID,
                                const void *buf,
-                               unsigned int szbuf,
-                               unsigned int *retsz);
+                               unsigned int *szbuf);
 
 #ifdef __cplusplus
 }

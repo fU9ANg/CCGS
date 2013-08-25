@@ -3,6 +3,8 @@
 
 int SendTask::DoWork ()
 {
+#define MSG_HEADER_LEN 8
+    char msg_head_str[MSG_HEADER_LEN];
     while (true)
     {
         CommBuf* p = NULL;
@@ -20,26 +22,23 @@ int SendTask::DoWork ()
             continue;
         }
 
-        //
-#if 0
-        cout << "Send cType: " << ((MSG_HEAD*)p->ptr())->cType <<endl;
-        printf ("address: %p\n", p);
-        if (((MSG_HEAD*)p->ptr())->cType == 187) {
-        cout << "-----------------------BEGIN-------------------------------------" << endl;
-        cout << "CTYPE: " << ((MSG_HEAD*) (p->ptr()))->cType << endl;
-        cout << "LEN: " << *(unsigned int*) ((char*)p->ptr() + MSG_HEAD_LEN) << endl;
-        cout << "STUDENT_ID: " << *(unsigned int*) ((char*)p->ptr() + MSG_HEAD_LEN + sizeof (unsigned int)) << endl;
-        cout << "STATUS: " << *(unsigned int*) ((char*)p->ptr() + MSG_HEAD_LEN + sizeof (int) + sizeof (int)) << endl;
-        cout << "STUDENT_ID: " << *(unsigned int*) ((char*)p->ptr() + MSG_HEAD_LEN + sizeof (int) + sizeof (int) + sizeof (int)) << endl;
-        cout << "STATUS: " << *(unsigned int*) ((char*)p->ptr() + MSG_HEAD_LEN + sizeof (int) + sizeof (int)+ sizeof (int) + sizeof (int)) << endl;
+        (void) memset (msg_head_str, 0x00, MSG_HEADER_LEN);
+        *(int *)msg_head_str = MSG_HEADER_LEN + p->UsedSize();
+        *(int *)(msg_head_str + sizeof (int)) = 0x00;
 
-        cout << "-------------------------END-----------------------------------" << endl;
+        if (MSG_HEADER_LEN  != send_v (fd, msg_head_str, MSG_HEADER_LEN))
+        {
+            printf ("[ERROR]: send message header.\n");
+
         }
-#endif
 
+
+        if (p->UsedSize() != (unsigned int)send_v (fd, p->Data(), p->UsedSize()))
+        {
+            printf ("[ERROR]: send body of message.\n");
+        }
+#if 0
         // send fck message to clients
-        // must be need written bytes data finished
-        //debugProtocol (p);
         int bytes_left = p->Size ();
         int written_bytes;
         char* ptr = (char*) p->Data ();
@@ -70,10 +69,10 @@ int SendTask::DoWork ()
             ptr += written_bytes;
         }
 
-
+#endif
 
         //printf("Send data...finished. packetLength=%ld, from FD=[%d]\n", p->size(), fd);
-        LOG(INFO) << "Send data ... finished. packet len=" << p->Size() << ", from FD=" << fd << endl;
+        LOG(INFO) << "Send data ... finished. packet len=" << p->UsedSize() << ", from FD=" << fd << endl;
 
         p->Reset ();
         SINGLETON->memPool.Free (p);

@@ -113,6 +113,8 @@ void CEvLoop::AcceptCB (struct ev_loop *loop, ev_io *w, int revents)
  */
 void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
 {
+#define MSG_HEADER_LEN  8
+
     //从内存池中取出一个buf
     CommBuf* buf = SINGLETON->memPool.Malloc ();
 
@@ -125,8 +127,8 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
     }
 
     //收包头长度
-    int i = recv_v (w->fd, buf->Data (), sizeof (int));
-    if (sizeof (int) != i)
+    int i = recv_v (w->fd, buf->Data (), MSG_HEADER_LEN);
+    if (MSG_HEADER_LEN != (unsigned int)i)
     {
         LOG (ERROR) << w->fd << ":recv head error! actually received len = " << i 
             << " info = " << strerror (errno) << endl;
@@ -136,12 +138,13 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
     }
 
     //收包体
-    int *p = (int*)buf->Data ();
-    i = recv_v (w->fd, (char*)buf->Data () + sizeof (int), *p - sizeof (unsigned int));
+    //int *p = (int*)buf->Data ();
+    int p = *(int*)buf->Data ();
+    i = recv_v (w->fd, (char*)buf->Data (), p - MSG_HEADER_LEN);
 
-    if ((*p - sizeof (unsigned int)) != (unsigned int)i)
+    if ((p - MSG_HEADER_LEN) != i)
     {
-        LOG (ERROR) << w->fd << ":recv body error! hope = " << *p << " actually received len = " << i 
+        LOG (ERROR) << w->fd << ":recv body error! hope = " << p << " actually received len = " << i 
             << " info = " << strerror (errno) << endl;
         SINGLETON->memPool.Free (buf);
         CEvLoop::CloseFD (w->fd);

@@ -41,17 +41,17 @@ OBJS    =		ccgs_module.o \
 
 
 # binary
-BIN	    = ccgs
+BIN	    = ccgs.run
 
 # CCGS library for developer
 LIBCCGS     = libccgs.so
 # where are include files kept
-INC	    = -I. -I./includes -I./message
+INC	    = -I. -I./includes -I./message -I/usr/local/include 
 
 # for Linker
 #LINK        = libs/libev.a libs/libglog.a libs/liblua52.so libs/libmysqlcppconn.so libs/libmemcached.so
-LINK        = -lev -lglog -lmysqlcppconn -llua5.2 -lmemcached -lprotobuf -lpthread \
-              -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt ./libccgs.so
+LINK        = -L/usr/local/lib -lev -lglog -lmysqlcppconn -llua-5.2 -lmemcached -lprotobuf -lpthread \
+              -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt
 # rock..
 
 all: clean libst.a precompile_protobuf ${LIBCCGS} $(BIN)
@@ -64,13 +64,13 @@ precompile_protobuf:
 
 # build CCGS shared library.
 ${LIBCCGS}: ${OBJS}
-	${CC} ${OBJS} -shared -fPIC -o ${LIBCCGS} libst/libst.a
+	${CC} ${OBJS} -shared -fPIC -o ${LIBCCGS} $(LINK) libst/libst.a
 # how to compiling programs
 #$(BIN):$(OBJS)
 $(BIN):$(LIBCCGS)
 #	$(CPP) $(CFLAGS) $(CDEBUG) -o $@ $(OBJS)
 #	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) -o $@ $(OBJS) $(LIBA) $(LINK)
-	${CPP} -L./ ${LINK} ccgs.cpp -o $(BIN) $(INC)
+	${CPP} -L./ -lccgs ccgs.cpp -o $(BIN) $(INC)
 %.o:%.cpp
 	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<
 %.o:%.cc

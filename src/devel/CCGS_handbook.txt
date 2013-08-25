@@ -1,0 +1,23 @@
+怎样发送数据
+＝＝＝＝＝＝
+
+    int sock;
+    char buffer[] = "Hello";
+        ...
+        ...
+    if (ccgs_send_data (sock, 100, buffer, strlen (buffer)) == 0) {
+        //TODO: send failed.
+    }
+
+
+怎样接收数据
+＝＝＝＝＝＝
+    unsigned int len;
+    void    *buffer = NULL;
+
+    if ((len = ccgs_recv_data (sock, &buffer, 100)) == 0) {
+        //TODO: recv failed.
+    }
+
+    free (buffer);
+

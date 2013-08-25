@@ -12,7 +12,7 @@
 #include <time.h>
 #include <unistd.h>
 #include "../src/devel/CCGS_common.h"
-#define SERV_IP "192.168.2.74"
+#define SERV_IP "0.0.0.0"
 #define SERV_PORT 9999 
 #define CON_NUM 1 
 
@@ -27,7 +27,6 @@ int main(int argc, char* argv[]){
     char s[] = "xxxxxxxxhelloo";
     unsigned int  x = sizeof (s);
     std::cout << "lenofs="<< x << std::endl;
-    ccgs_make_buffer (0, s, &x);
     std::cout << "len=====" << x << std::endl;
     getchar ();
     struct sockaddr_in addr;
@@ -52,6 +51,9 @@ unsigned int x = sizeof (s);
 send(cntFd[i], s, sizeof(s), 0);
 //ccgs_send_data (cntFd[i], ccgs_make_buffer (0, s, &x), x);
 #endif
+               char echostr[] = "PING";
+
+               ccgs_send_data (cntFd[i], 0, echostr, strlen (echostr));
         }
    // }
 

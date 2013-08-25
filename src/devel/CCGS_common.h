@@ -15,7 +15,7 @@ extern "C" {
 /*
  *  allocate the memory,which is used to send/receive data.
  */
-extern ccgs_sockbuf_t *ccgs_sockbuf_alloc ();
+extern ccgs_sockbuf_t *ccgs_sockbuf_alloc (unsigned int);
 
 /*
  * use it to free a memory allocated with ccgs_mod_alloc before.
@@ -25,7 +25,7 @@ extern void ccgs_sockbuf_free (ccgs_sockbuf_t *);
 /*
  * add data into send queue, 
  */
-extern int ccgs_add_into_queue (ccgs_sockbuf_t *);
+extern int ccgs_add_into_queue (ccgs_sockbuf_t *, unsigned int);
 
 /*
  * use the following function to get socket descriptor with the
@@ -46,14 +46,18 @@ extern void ccgs_set_remote_descriptor (ccgs_sockbuf_t*, int);
  * the following function will add a CCGS header at the front of
  * data.
  */
-extern unsigned int ccgs_send_data (int skfd, 
+extern unsigned int ccgs_send_data (int skfd,
+                                    unsigned int MID, 
                                     const void *data, 
                                     unsigned int size);
-
+extern unsigned int ccgs_recv_data (int skfd,
+                                    void **data,
+                                    unsigned int MID);
+/*
 extern void *ccgs_make_buffer (unsigned int MID,
                                const void *buf,
                                unsigned int *szbuf);
-
+*/                                  
 #ifdef __cplusplus
 }
 #endif

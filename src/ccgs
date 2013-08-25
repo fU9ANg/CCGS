@@ -1,0 +1,12 @@
+#!/bin/sh
+
+PWD=`pwd`
+
+if [ ! -f "$PWD/ccgs.run" ]; then
+    echo "Please run make command first."
+    exit 1
+else
+     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD; export LD_LIBRARY_PATH
+
+     $PWD/ccgs.run $1
+fi

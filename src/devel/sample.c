@@ -4,8 +4,10 @@
 
 #include "CCGS_common.h"
 
+static unsigned int MID;
 static int ccgs_module_load (ccgs_module_t *mod, unsigned int mid)
 {
+    MID = mid;
     return 0;
 }
 
@@ -16,7 +18,7 @@ static int ccgs_module_handler (ccgs_module_t *mod, ccgs_sockbuf_t *skbuf)
     strcpy ((char*)skbuf->buffer,"How are you");
     skbuf->data_length = strlen ("How are you");
 
-    ccgs_add_into_queue (skbuf);
+    ccgs_add_into_queue (skbuf, MID);
     return 0;
 }
 

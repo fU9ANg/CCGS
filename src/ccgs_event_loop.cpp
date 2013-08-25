@@ -155,6 +155,7 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
         return;
     }
 
+    buf->usedSize = i;
     cout << (char*)buf->Data () << endl;
     cout << "push message to queue" << endl;
     CEvLoop::ioarray[w->fd].lasttime = ev_time ();

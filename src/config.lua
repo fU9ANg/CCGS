@@ -22,7 +22,7 @@ server_port=9999;
 module_list="devel/mymodule.so:0"
 
 -- ecServer IP
-server_ip="192.168.2.73";
+server_ip="0.0.0.0";
 --server_ip="172.16.10.103";
 -- memcached server
 mc_server="172.16.10.103"

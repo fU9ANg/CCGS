@@ -8,6 +8,7 @@
 #define MODULE_ENTRY __declspec(dllexport)
 #else
 #define MODULE_ENTRY
+
 #endif
 
 #define MOD_VERSION(maj,min) \

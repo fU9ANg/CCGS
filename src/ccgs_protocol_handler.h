@@ -26,6 +26,8 @@ public:
         skbuf->size    = buf->buffSize;
         skbuf->data_length = buf->usedSize-SZCCGSHDR;
 
+        printf ("[CCGS]recived data [length: %u]\n", skbuf->data_length);
+
         if (module == NULL ||
             module->m_id != skbuf->header->MID) {
             module = SINGLETON->moduleManager.getModule (skbuf->header->MID);

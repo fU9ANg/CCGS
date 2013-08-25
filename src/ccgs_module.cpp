@@ -38,19 +38,19 @@ bool CModule::load (string name, unsigned int id)
 
     this->m_name = name;
     this->m_id   = id;
-    this->m_handle = dlopen (name.c_str (), RTLD_LAZY);
-    if (this->m_handle == NULL) {
+    this->m_handle = dlopen (name.c_str (), RTLD_NOW);
+    if (!this->m_handle) {
+        fprintf (stderr, "[MODULE] load module failed: %s\n", dlerror ());
         return false;
     }
 
     this->m_module = (ccgs_module_t*)dlsym (this->m_handle, CCGS_MODULE_SYMBOL);
-    if (this->m_module == NULL) {
+    if (!this->m_module) {
+        fprintf (stderr, "[MODULE] can't find the symbol %s\n", CCGS_MODULE_SYMBOL);
         dlclose (this->m_handle);
         return false;
     }
-#ifdef DEBUG
-    printf ("load module [%s:%d] successfully.\n", name.c_str (), id);
-#endif
+    fprintf (stderr, "[MODULE] load module [%s:%d] successfully.\n", name.c_str (), id);
     
     ret = this->m_module->mod_load (this->m_module, id);
     if (ret < 0) {
@@ -160,6 +160,7 @@ bool CModuleManager::init ()
     if (ret < 0) {
         return false;
     }
+
     return true;
 }
 
@@ -184,11 +185,14 @@ bool CModuleManager::load (string modcfg)
             *sepstr = '\0';
             modid   = (unsigned int)atoi (sepstr + 1);
         }
-
+      
         module = new CModule ();
         if (!module->load (string (modname), modid)) {
             //TODO: write log if loaded module failed.
+
+            fprintf (stderr, "Loaded module[%s] failed: %s\n", modname, dlerror ());
             this->unload ();
+            return false;
         } else {
             ST_hash_add_object (&this->hash_by_id, 
                                 (void*)module, 

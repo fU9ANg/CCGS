@@ -4,18 +4,23 @@
 
 #include "ccgs_common_buffer.h"
 #include "ccgs_singleton.h"
-#include "devel/CCGS_common.h"
+#include "ccgs_utils.h"
+
 
 struct msg_header {
     unsigned int length;
     unsigned int reserved;
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 unsigned int ccgs_send_data (int skfd,
                              const void *data, 
                              unsigned int size)
 {
-    
+#if 0    
     struct iovec  iovec[2];
     struct msg_header msg;
     struct msghdr ccgs_data;
@@ -36,6 +41,21 @@ unsigned int ccgs_send_data (int skfd,
     ccgs_data.msg_control  = NULL;
     ccgs_data.msg_controllen = 0;
     return sendmsg (skfd, &ccgs_data, 0);
+#endif
+
+    struct msg_header msg;
+    msg.length = size + sizeof (msg);
+    msg.reserved = 0;
+
+    if (send_v (skfd, &msg, sizeof (msg)) <= 0) {
+        return -1;
+    }
+
+    if (send_v (skfd, (void*)data, (size_t)size) <= 0) {
+        return -1;
+    }
+
+    return 0;
 }
 
 void *ccgs_make_buffer (unsigned int MID,
@@ -141,3 +161,6 @@ void ccgs_set_socket_descriptor (const ccgs_sockbuf_t *skbuf, int sock)
     }
 }
 
+#ifdef __cplusplus
+}
+#endif

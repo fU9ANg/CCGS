@@ -1,6 +1,6 @@
 MODULE=mymodule.so
 CC=gcc
-CFLAGS=-Wall -L../ -lccgs -fPIC -shared
+CFLAGS=-Wall  -fPIC -shared -L../ -lccgs
 
 all:${MODULE}
 

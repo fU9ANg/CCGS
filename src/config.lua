@@ -19,12 +19,11 @@ db_database="teaching_db";
 server_port=9999;
 
 -- module list
-module_list="xxxx"
+module_list="mymodule.so:0"
 
 -- ecServer IP
-server_ip="192.168.0.254";
+server_ip="192.168.2.74";
 --server_ip="172.16.10.103";
-
 -- memcached server
 mc_server="172.16.10.103"
 

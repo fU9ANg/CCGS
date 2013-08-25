@@ -76,7 +76,7 @@ int CManager::Process (int argc, char** argv)
             google::SetLogDestination (google::ERROR, "./logs/error");
             google::SetStderrLogging  (google::ERROR + 1);
             CONFIG->Read (CONFIGFILE);
-
+#if 0
             //connect to database.
             if (!DATABASE->Init(CONFIG->db_host, \
                                 CONFIG->db_username, \
@@ -86,7 +86,7 @@ int CManager::Process (int argc, char** argv)
                 printf("[ERROR] -- Database: Please check database configure file\n");
                 return 0;
             }
-
+#endif
             if (!this->InitSystemManager ()) {
                 return -1;
             }

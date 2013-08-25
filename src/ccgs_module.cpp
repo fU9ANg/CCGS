@@ -260,6 +260,8 @@ ccgs_sockbuf_t *ccgs_sockbuf_alloc (unsigned int size)
     }
 
     combuf = new CommBuf (size + SZCCGSHDR);
+    combuf->socketFd = -1;
+
     bufptr = combuf->dataPtr;
 
     skbuf->intrptr= combuf;
@@ -301,5 +303,25 @@ int ccgs_add_into_queue (ccgs_sockbuf_t *skbuf, unsigned int mid)
         SINGLETON->moduleManager.addMBufferIntoQueue ((void*)skbuf, mid);
     }
     return 0;
+}
+
+int ccgs_get_socket_descriptor (const ccgs_sockbuf_t *skbuf)
+{
+    CommBuf *combuf = (CommBuf*)skbuf->intrptr;
+
+    if (combuf) {
+        return combuf->socketFd;
+    }
+
+    return -1;
+}
+
+void ccgs_set_socket_descriptor (const ccgs_sockbuf_t *skbuf, int sock)
+{
+    CommBuf *combuf = (CommBuf*)skbuf->intrptr;
+
+    if (combuf) {
+        combuf->socketFd = sock;
+    }
 }
 

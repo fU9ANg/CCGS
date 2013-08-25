@@ -6,18 +6,25 @@
 #include "ccgs_singleton.h"
 #include "devel/CCGS_common.h"
 
+struct msg_header {
+    unsigned int length;
+    unsigned int reserved;
+};
 
-unsigned int ccgs_send_data (int skfd, 
-                             unsigned int MID,
+unsigned int ccgs_send_data (int skfd,
                              const void *data, 
                              unsigned int size)
 {
-    ccgs_header_t ccgs_hdr;
+    
     struct iovec  iovec[2];
+    struct msg_header msg;
     struct msghdr ccgs_data;
 
-    iovec[0].iov_base = &ccgs_hdr;
-    iovec[0].iov_len  = SZCCGSHDR;
+    msg.length = sizeof (struct msg_header) + size;
+    msg.reserved = 0;
+
+    iovec[0].iov_base = (void*)&msg;
+    iovec[0].iov_len  = sizeof (struct msg_header);
 
     iovec[1].iov_base = (void*)data;
     iovec[1].iov_len  = size;
@@ -28,18 +35,32 @@ unsigned int ccgs_send_data (int skfd,
     ccgs_data.msg_iovlen   = 2;
     ccgs_data.msg_control  = NULL;
     ccgs_data.msg_controllen = 0;
-
-    memcpy (ccgs_hdr.identifier, CCGS_IDENTIFIER, 4);
-    ccgs_hdr.status  = 0;
-    ccgs_hdr.flags   = 0;
-    ccgs_hdr.length  = size;
-    ccgs_hdr.TID     = 23;
-    ccgs_hdr.MID     = MID;
-
     return sendmsg (skfd, &ccgs_data, 0);
 }
 
-#include "ccgs_singleton.h"
+void *ccgs_make_buffer (unsigned int MID,
+                        const void *data,
+                        unsigned int size)
+{
+    ccgs_header_t *ccgs_hdr = NULL;
+    void      *buffer = NULL;
+
+    buffer = calloc (1, size + SZCCGSHDR);
+    if (buffer) {
+        ccgs_hdr = (ccgs_header_t*)buffer;
+
+        memcpy (ccgs_hdr->identifier, CCGS_IDENTIFIER, 4);
+        ccgs_hdr->MID = MID;
+        ccgs_hdr->status = 0;
+        ccgs_hdr->flags  = 0;
+        ccgs_hdr->TID    = 0;
+        ccgs_hdr->length = size;
+        
+        memcpy ((char*)buffer + SZCCGSHDR, data, size);
+    }
+
+    return buffer;
+}
 
 ccgs_sockbuf_t *ccgs_sockbuf_alloc (unsigned int size)
 {

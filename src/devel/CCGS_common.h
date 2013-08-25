@@ -15,8 +15,13 @@ extern "C" {
  * the following function will add a CCGS header at the front of
  * data.
  */
-extern unsigned int ccgs_send_data (int skfd, unsigned int MID, 
-                                    const void *data, unsigned int size);
+extern unsigned int ccgs_send_data (int skfd, 
+                                    const void *data, 
+                                    unsigned int size);
+
+extern void *ccgs_make_buffer (unsigned int MID,
+                               const void *buf,
+                               unsigned int szbuf);
 
 #ifdef __cplusplus
 }

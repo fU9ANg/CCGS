@@ -1,4 +1,3 @@
-
 #
 # makefile
 #
@@ -10,20 +9,11 @@ PBSRC   = ./protos
 PBDST   = ./message
 
 # which c plus plus compiler
-CPP     = ccache g++46
-
+CPP     = c++
 # which c compiler
-CC      = ccache gcc46
-
+CC      = cc
 # options for compiler
-CFLAGS  = -Wall -Werror -fPIC -DDEBUG
-
-# is debug? (for development)
-CDEBUG  = -g
-
-# macro
-CMACRO	= 
-#-D_OLD_MAKEHOUSE_GAME
+CFLAGS  = -Wall -Werror -fPIC
 
 # objects
 OBJS    =		ccgs_module.o \
@@ -38,23 +28,31 @@ OBJS    =		ccgs_module.o \
 			ccgs_utils.o \
 			ccgs_memcached.o \
 			ccgs_common.o
+BINCCGS=ccgs
+LIBCCGS=libccgs.so
 
-
-# binary
-BIN	    = ccgs
-
-# CCGS library for developer
-LIBCCGS     = libccgs.so
 # where are include files kept
-INC	    = -I. -I./includes -I./message -I/media/repos/CCGS-extra/include
+INCDIRS	    = -I. -I./include -I/usr/local/include
 
 # for Linker
-#LINK        = libs/libev.a libs/libglog.a libs/liblua52.so libs/libmysqlcppconn.so libs/libmemcached.so
-LINK        = -L/media/repos/CCGS-extra/lib/ -lev -lglog -lmysqlcppconn -llua-5.2 -lmemcached -lprotobuf -lpthread \
-              -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt -ldl
+LIBDIRS     = -L/usr/local/lib -L./
+
+LIBS        = -lev \
+              -lglog \
+              -lmysqlcppconn \
+              -llua-5.2 \
+              -lmemcached \
+              -lprotobuf \
+              -lpthread \
+              -lboost_system \
+              -lboost_thread \
+              -lboost_program_options \
+              -lboost_filesystem \
+              -lrt 
+#              -ldl
 # rock..
 
-all: clean libst.a precompile_protobuf ${LIBCCGS} $(BIN)
+all: clean  libst.a precompile_protobuf ${LIBCCGS} $(BINCCGS)
 
 libst.a:
 	cd libst && make
@@ -64,23 +62,22 @@ precompile_protobuf:
 
 # build CCGS shared library.
 ${LIBCCGS}: ${OBJS}
-	${CC} ${OBJS} -shared -fPIC -o ${LIBCCGS} $(LINK) libst/libst.a
+	${CC} ${OBJS} -shared -fPIC -o ${LIBCCGS} ${LIBDIRS} ${LIBS} libst/libst.a
 
 # how to compiling programs
-#$(BIN):$(OBJS)
-$(BIN):$(LIBCCGS)
-#	$(CPP) $(CFLAGS) $(CDEBUG) -o $@ $(OBJS)
-#	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) -o $@ $(OBJS) $(LIBA) $(LINK)
-	${CPP} $(INC) -L./ -lccgs -g ccgs.cpp -o $(BIN)
-%.o:%.cpp
-	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<
-%.o:%.cc
-	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<
+$(BINCCGS):$(LIBCCGS)
+	${CPP} $(INCDIRS) ${LIBDIRS} -lccgs -g ccgs.cpp -o $(BINCCGS)
+#%.o:%.cpp
+.cpp.o:
+	$(CPP) $(CFLAGS) ${INCDIRS} -o $@ -c $<
+#%.o:%.cc
+.cc.o:
+	$(CPP) $(CFLAGS) ${INCDIRS} -o $@ -c $<
 %.o:%.c
-	$(CC)  $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<
+	$(CC)  $(CFLAGS) ${INCDIRS} -o $@ -c $<
 
 .PHONY: clean
 
 clean:
-	-rm -rf *.o $(BIN) *~ logs .lock message/* ${LIBCCGS}
+	-rm -rf *.o $(BINCCGS) *~ logs .lock message/* ${LIBCCGS}
 	cd ./libst/ && make clean

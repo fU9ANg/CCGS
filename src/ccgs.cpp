@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include "ccgs_thread_pool.h"
 #include "ccgs_atomic.h"

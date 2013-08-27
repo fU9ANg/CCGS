@@ -20,7 +20,6 @@
 #include "mysql/cppconn/prepared_statement.h"
 
 #include "glog/logging.h"
-
 #include "ccgs_configure.h"
 #include "ccgs_thread_mutex.h"
 

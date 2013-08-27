@@ -41,7 +41,7 @@ OBJS    =		ccgs_module.o \
 
 
 # binary
-BIN	    = ccgs.run
+BIN	    = ccgs
 
 # CCGS library for developer
 LIBCCGS     = libccgs.so
@@ -50,7 +50,7 @@ INC	    = -I. -I./includes -I./message -I/usr/local/include
 
 # for Linker
 #LINK        = libs/libev.a libs/libglog.a libs/liblua52.so libs/libmysqlcppconn.so libs/libmemcached.so
-LINK        = -L/usr/local/lib -lev -lglog -lmysqlcppconn -llua5.2 -lmemcached -lprotobuf -lpthread \
+LINK        = -L/usr/local/lib -lev -lglog -lmysqlcppconn -llua-5.2 -lmemcached -lprotobuf -lpthread \
               -lboost_system -lboost_thread -lboost_program_options -lboost_filesystem -lrt
 # rock..
 
@@ -72,7 +72,7 @@ $(BIN):$(LIBCCGS)
 #	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) -o $@ $(OBJS) $(LIBA) $(LINK)
 	${CPP} -L./ -lccgs ccgs.cpp -o $(BIN) $(INC)
 %.o:%.cpp
-	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<
+	echo "$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<"
 %.o:%.cc
 	$(CPP) $(CFLAGS) $(CDEBUG) $(BHFLAGS) $(CMACRO) $(INC) -o $@ -c $<
 %.o:%.c

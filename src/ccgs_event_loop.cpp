@@ -1,6 +1,12 @@
 
 #include "ccgs_event_loop.h"
 
+#ifdef __BSD_VISIBLE
+#define EVENT_POLL EVBACKEND_POLL
+#else
+#define EVENT_POLL EVBACKEND_EPOLL
+#endif
+
 struct ev_loop* CEvLoop::loop = NULL;
 struct ev_io_info CEvLoop::ioarray[MAXFD];
 CAtomic<int> CEvLoop::clientcount;
@@ -54,7 +60,7 @@ int CEvLoop::DoWork ()
     ev_io *ev_io_watcher =  (ev_io*) malloc (sizeof (ev_io));
     //ev_io ev_io_watcher;
     //ev_timer timer;
-    CEvLoop::loop = ev_loop_new (EVBACKEND_EPOLL);
+    CEvLoop::loop = ev_loop_new (EVENT_POLL);
 
     ev_io_init (ev_io_watcher, AcceptCB, m_listenfd, EV_READ);
 

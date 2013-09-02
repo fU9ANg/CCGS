@@ -1,1 +1,1 @@
-g++ utest_client.c ../src/ccgs_module.o ../src/ccgs_common.o -ldl ../src/libst/libst.a  ../src/ccgs_singleton.o
+g++ -g utest_multi_client.c ../src/ccgs_module.o ../src/ccgs_common.o -ldl ../src/libst/libst.a  ../src/ccgs_singleton.o ../src/ccgs_utils.o

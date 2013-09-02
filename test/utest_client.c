@@ -12,7 +12,7 @@
 #include <time.h>
 #include <unistd.h>
 #include "../src/devel/CCGS_common.h"
-#define SERV_IP "0.0.0.0"
+#define SERV_IP "192.168.0.254"
 #define SERV_PORT 9999 
 #define CON_NUM 1 
 

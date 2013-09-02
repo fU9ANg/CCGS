@@ -13,6 +13,7 @@ int SendTask::DoWork ()
             continue;
         }
 
+        cout << "SEND ..... DATA ...... TO ..... CLIENT\n";
         int fd = p->SocketFd ();
 
         if (fd <= 0)
@@ -35,7 +36,7 @@ int SendTask::DoWork ()
         cout << p->Data () << endl;
         cout << p->UsedSize () << endl;
         unsigned int send_len =  (unsigned int)send_v (fd, p->Data(), p->UsedSize());
-        cout << "send len = " << send_len << endl;
+        cout << "send len = " << send_len << ", UsedSize = " << p->UsedSize () << endl;
         if (p->UsedSize() != send_len)
         {
             printf ("[ERROR]: send body of message.\n");

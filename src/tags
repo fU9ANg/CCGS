@@ -1,0 +1,323 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AcceptCB	ccgs_event_loop.cpp	/^void CEvLoop::AcceptCB (struct ev_loop *loop, ev_io *w, int revents)$/;"	f	class:CEvLoop
+CAtomic	ccgs_atomic.h	/^        CAtomic()$/;"	f	class:CAtomic
+CAtomic	ccgs_atomic.h	/^        CAtomic(TYPE a)$/;"	f	class:CAtomic
+CAtomic	ccgs_atomic.h	/^class CAtomic$/;"	c
+CCGS_EVENT_LOOP_H_	ccgs_event_loop.h	3;"	d
+CCGS_IDENTIFIER	devel/CCGS_proto.h	6;"	d
+CCGS_MODULE_SYMBOL	devel/CCGS_module.h	68;"	d
+CCGS_RECV_TASK_H_	ccgs_recv_task.h	3;"	d
+CCGS_SEND_TASK_H_	ccgs_send_task.h	3;"	d
+CCondition	ccgs_thread_mutex.h	/^        CCondition (CMutex& m) : mutex (m)$/;"	f	class:CCondition
+CCondition	ccgs_thread_mutex.h	/^class CCondition$/;"	c
+CEvLoop	ccgs_event_loop.cpp	/^CEvLoop::CEvLoop (string ip, int port)$/;"	f	class:CEvLoop
+CEvLoop	ccgs_event_loop.h	/^class CEvLoop: public threadTask$/;"	c
+CGuard	ccgs_thread_mutex.h	/^        explicit CGuard (CMutex& m) : mutex (m)$/;"	f	class:CGuard
+CGuard	ccgs_thread_mutex.h	/^class CGuard$/;"	c
+CGuard	ccgs_thread_mutex.h	102;"	d
+CManager	ccgs_manager.cpp	/^CManager::CManager ()$/;"	f	class:CManager
+CManager	ccgs_manager.h	/^class CManager$/;"	c
+CMemPool	ccgs_mem_pool.h	/^    CMemPool (int n = MAX_POOL_BUF)$/;"	f	class:CMemPool
+CMemPool	ccgs_mem_pool.h	/^class CMemPool$/;"	c
+CMemcached	ccgs_memcached.cpp	/^CMemcached::CMemcached ()$/;"	f	class:CMemcached
+CMemcached	ccgs_memcached.h	/^class CMemcached$/;"	c
+CModule	ccgs_module.cpp	/^CModule::CModule ()$/;"	f	class:CModule
+CModule	ccgs_module.h	/^class CModule {$/;"	c
+CModuleManager	ccgs_module.cpp	/^CModuleManager::CModuleManager ()$/;"	f	class:CModuleManager
+CModuleManager	ccgs_module.h	/^class CModuleManager {$/;"	c
+CMutex	ccgs_thread_mutex.h	/^        CMutex ()$/;"	f	class:CMutex
+CMutex	ccgs_thread_mutex.h	/^class CMutex$/;"	c
+CONFIG	ccgs_configure.h	31;"	d
+CONFIGFILE	ccgs_manager.h	21;"	d
+CProtocolHandler	ccgs_protocol_handler.h	/^class CProtocolHandler {$/;"	c
+CQueue	ccgs_common_queue.h	/^    CQueue ()$/;"	f	class:CQueue
+CQueue	ccgs_common_queue.h	/^class CQueue$/;"	c
+CT_FLAGS	ccgs_thread_task.h	10;"	d
+CThreadPool	ccgs_thread_pool.cpp	/^CThreadPool::CThreadPool (int n) : free(0)$/;"	f	class:CThreadPool
+CThreadPool	ccgs_thread_pool.h	/^class CThreadPool$/;"	c
+CloseFD	ccgs_event_loop.cpp	/^void CEvLoop::CloseFD (int fd)$/;"	f	class:CEvLoop
+CommBuf	ccgs_common_buffer.h	/^	CommBuf (CommBuf& rhs)$/;"	f	class:CommBuf
+CommBuf	ccgs_common_buffer.h	/^	CommBuf (size_t nSize = MAX_BUF)$/;"	f	class:CommBuf
+CommBuf	ccgs_common_buffer.h	/^class CommBuf $/;"	c
+Config	ccgs_configure.cpp	/^Config::Config ()$/;"	f	class:Config
+Config	ccgs_configure.h	/^class Config {$/;"	c
+DATABASE	ccgs_db_connection.h	73;"	d
+DEFINE_CCGS_MODULE	devel/CCGS_module.h	75;"	d
+Data	ccgs_common_buffer.h	/^	void* Data ()$/;"	f	class:CommBuf
+DataBase	ccgs_db_connection.cpp	/^DataBase::DataBase ()$/;"	f	class:DataBase
+DataBase	ccgs_db_connection.h	/^class DataBase$/;"	c
+DoWork	ccgs_event_loop.cpp	/^int CEvLoop::DoWork ()$/;"	f	class:CEvLoop
+DoWork	ccgs_recv_task.cpp	/^int RecvTask::DoWork ()$/;"	f	class:RecvTask
+DoWork	ccgs_send_task.cpp	/^int SendTask::DoWork ()$/;"	f	class:SendTask
+ECCGS_MODULE_NOT_FOUND	devel/CCGS_proto.h	4;"	d
+EVENT_POLL	ccgs_event_loop.cpp	5;"	d	file:
+EVENT_POLL	ccgs_event_loop.cpp	7;"	d	file:
+Free	ccgs_mem_pool.h	/^    int Free (TYPE* i)$/;"	f	class:CMemPool
+GetClientCount	ccgs_event_loop.cpp	/^int CEvLoop::GetClientCount ()$/;"	f	class:CEvLoop
+GetCount	ccgs_thread_pool.cpp	/^int CThreadPool::GetCount ()$/;"	f	class:CThreadPool
+GetId	ccgs_common_buffer.h	/^	int GetId ()$/;"	f	class:CommBuf
+GetInstance	ccgs_configure.cpp	/^Config* Config::GetInstance ()$/;"	f	class:Config
+GetInstance	ccgs_singleton.cpp	/^Singleton* Singleton::GetInstance () $/;"	f	class:Singleton
+GetMutex	ccgs_thread_mutex.h	/^        pthread_mutex_t* GetMutex ()$/;"	f	class:CMutex
+InQueue	ccgs_common_queue.h	/^    int InQueue (TYPE t)$/;"	f	class:CQueue
+Init	ccgs_db_connection.cpp	/^bool DataBase::Init (string host, string user_name, string password, string database)$/;"	f	class:DataBase
+InitSystemManager	ccgs_manager.cpp	/^bool CManager::InitSystemManager ()$/;"	f	class:CManager
+Kill	ccgs_thread_pool.cpp	/^int CThreadPool::Kill ()$/;"	f	class:CThreadPool
+LOCK_NOWAIT	ccgs_manager.h	/^    LOCK_NOWAIT = LOCK_EX | LOCK_NB,$/;"	e	enum:__anon1
+LOCK_WAIT	ccgs_manager.h	/^    LOCK_WAIT   = LOCK_EX,$/;"	e	enum:__anon1
+Lock	ccgs_manager.cpp	/^bool CManager::Lock (int mode)$/;"	f	class:CManager
+Lock	ccgs_thread_mutex.h	/^        void Lock ()$/;"	f	class:CMutex
+MAXFD	ccgs_event_loop.h	28;"	d
+MAX_BUF	ccgs_common_buffer.h	8;"	d
+MAX_POOL_BUF	ccgs_mem_pool.h	12;"	d
+MEMCACHED	ccgs_memcached.h	31;"	d
+MID	devel/CCGS_proto.h	/^    unsigned int   MID;$/;"	m	struct:ccgs_header
+MID	devel/sample.c	/^static unsigned int MID;$/;"	v	file:
+MODULE_ENTRY	devel/CCGS_module.h	10;"	d
+MODULE_ENTRY	devel/CCGS_module.h	8;"	d
+MODULE_MANAGER	ccgs_module.h	67;"	d
+MOD_MAJOR	devel/CCGS_module.h	17;"	d
+MOD_MINOR	devel/CCGS_module.h	16;"	d
+MOD_VERSION	devel/CCGS_module.h	14;"	d
+MSG_HEADER_LEN	ccgs_event_loop.cpp	122;"	d	file:
+MSG_HEADER_LEN	ccgs_send_task.cpp	6;"	d	file:
+Malloc	ccgs_mem_pool.h	/^    TYPE* Malloc ()$/;"	f	class:CMemPool
+Notify	ccgs_thread_mutex.h	/^        void Notify ()$/;"	f	class:CCondition
+NotifyAll	ccgs_thread_mutex.h	/^        void NotifyAll ()$/;"	f	class:CCondition
+OutQueue	ccgs_common_queue.h	/^    int OutQueue (TYPE& out, unsigned int timeout)$/;"	f	class:CQueue
+Process	ccgs_manager.cpp	/^int CManager::Process (int argc, char** argv)$/;"	f	class:CManager
+PushTask	ccgs_thread_pool.cpp	/^int CThreadPool::PushTask (threadTask* p)$/;"	f	class:CThreadPool
+Read	ccgs_configure.cpp	/^void Config::Read (string file)$/;"	f	class:Config
+RecvCB	ccgs_event_loop.cpp	/^void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)$/;"	f	class:CEvLoop
+RecvTask	ccgs_recv_task.cpp	/^RecvTask::RecvTask ()$/;"	f	class:RecvTask
+RecvTask	ccgs_recv_task.h	/^class RecvTask: public threadTask$/;"	c
+ReleaseSystem	ccgs_manager.cpp	/^void CManager::ReleaseSystem ()$/;"	f	class:CManager
+Reset	ccgs_common_buffer.h	/^	void Reset ()$/;"	f	class:CommBuf
+Run	ccgs_manager.cpp	/^int CManager::Run ()$/;"	f	class:CManager
+SINGLETON	ccgs_singleton.h	27;"	d
+ST_FLAGS	ccgs_thread_task.h	11;"	d
+SZCCGSHDR	devel/CCGS_proto.h	39;"	d
+Send2	ccgs_utils.c	/^void Send2 (int fd, void* pdata, ssize_t left)$/;"	f
+SendTask	ccgs_send_task.cpp	/^SendTask::SendTask () $/;"	f	class:SendTask
+SendTask	ccgs_send_task.h	/^class SendTask: public threadTask$/;"	c
+SetId	ccgs_common_buffer.h	/^	void SetId (int id)$/;"	f	class:CommBuf
+SetNodelay	ccgs_event_loop.cpp	/^void CEvLoop::SetNodelay (int fd)$/;"	f	class:CEvLoop
+SetNonblock	ccgs_event_loop.cpp	/^void CEvLoop::SetNonblock (int fd)$/;"	f	class:CEvLoop
+SetReuseAddr	ccgs_event_loop.cpp	/^void CEvLoop::SetReuseAddr (int fd)$/;"	f	class:CEvLoop
+SetSize	ccgs_common_buffer.h	/^	size_t SetSize (size_t n)$/;"	f	class:CommBuf
+SetSocket	ccgs_common_buffer.h	/^	void SetSocket (int fd)$/;"	f	class:CommBuf
+SigHandler	ccgs_manager.cpp	/^void CManager::SigHandler (int signo)$/;"	f	class:CManager
+SigHandler	ccgs_thread_pool.cpp	/^void CThreadPool::SigHandler (int signo)$/;"	f	class:CThreadPool
+Singleton	ccgs_singleton.cpp	/^Singleton::Singleton ()$/;"	f	class:Singleton
+Singleton	ccgs_singleton.h	/^class Singleton $/;"	c
+Size	ccgs_common_buffer.h	/^	size_t Size ()$/;"	f	class:CommBuf
+Size	ccgs_common_queue.h	/^    size_t Size ()$/;"	f	class:CQueue
+Size	ccgs_mem_pool.h	/^    int Size ()$/;"	f	class:CMemPool
+SocketFd	ccgs_common_buffer.h	/^	int SocketFd ()$/;"	f	class:CommBuf
+Start	ccgs_thread_pool.cpp	/^int CThreadPool::Start ()$/;"	f	class:CThreadPool
+StartListen	ccgs_event_loop.cpp	/^int CEvLoop::StartListen ()$/;"	f	class:CEvLoop
+Stop	ccgs_thread_pool.cpp	/^int CThreadPool::Stop ()$/;"	f	class:CThreadPool
+TID	devel/CCGS_proto.h	/^    unsigned int  TID;$/;"	m	struct:ccgs_header
+TIMEOUT	ccgs_event_loop.h	29;"	d
+Thread	ccgs_thread_pool.cpp	/^void* CThreadPool::Thread (void* p)$/;"	f	class:CThreadPool
+TimeOutCB	ccgs_event_loop.cpp	/^void CEvLoop::TimeOutCB (struct ev_loop* loop, struct ev_timer *timer, int revents)$/;"	f	class:CEvLoop
+UNLOCK	ccgs_manager.h	/^    UNLOCK      = LOCK_UN$/;"	e	enum:__anon1
+UnLock	ccgs_thread_mutex.h	/^        void UnLock ()$/;"	f	class:CMutex
+Used	ccgs_mem_pool.h	/^    int Used ()$/;"	f	class:CMemPool
+UsedSize	ccgs_common_buffer.h	/^	size_t UsedSize ()$/;"	f	class:CommBuf
+Value	ccgs_atomic.h	/^        TYPE Value()$/;"	f	class:CAtomic
+Wait	ccgs_thread_mutex.h	/^        int Wait ()$/;"	f	class:CCondition
+Wait	ccgs_thread_mutex.h	/^        int Wait (time_t t)$/;"	f	class:CCondition
+_CCGS_ATOMIC_H_	ccgs_atomic.h	5;"	d
+_CCGS_COMMON_BUFFER_H_	ccgs_common_buffer.h	2;"	d
+_CCGS_COMMON_H	devel/CCGS_common.h	2;"	d
+_CCGS_COMMON_QUEUE_H_	ccgs_common_queue.h	3;"	d
+_CCGS_CONFIGURE_H	ccgs_configure.h	2;"	d
+_CCGS_DB_CONNECTION_H_	ccgs_db_connection.h	8;"	d
+_CCGS_LOGIC_H_	ccgs_manager.h	3;"	d
+_CCGS_MEM_POOL_H_	ccgs_mem_pool.h	3;"	d
+_CCGS_MODULE_H	ccgs_module.h	2;"	d
+_CCGS_PROTOCOL_HANDLER_H	ccgs_protocol_handler.h	2;"	d
+_CCGS_SINGLETON_H_	ccgs_singleton.h	3;"	d
+_CCGS_THREAD_MUTEX_H_	ccgs_thread_mutex.h	3;"	d
+_CCGS_THREAD_POOL_H_	ccgs_thread_pool.h	3;"	d
+_CCGS_THREAD_TASK_H_	ccgs_thread_task.h	3;"	d
+_CCGS_UTILS_H_	ccgs_utils.h	3;"	d
+__CCGS_MEMCACHED_H	ccgs_memcached.h	3;"	d
+__CCGS_MOD_H	devel/CCGS_module.h	2;"	d
+__CCGS_PROTOCOL_H	devel/CCGS_proto.h	2;"	d
+addMBufferIntoQueue	ccgs_module.cpp	/^void CModuleManager::addMBufferIntoQueue (void *buf, unsigned int mid)$/;"	f	class:CModuleManager
+blockQueue	ccgs_mem_pool.h	/^    queue<TYPE*> blockQueue;$/;"	m	class:CMemPool
+buffId	ccgs_common_buffer.h	/^	int     buffId;$/;"	m	class:CommBuf
+buffSize	ccgs_common_buffer.h	/^	size_t  buffSize;$/;"	m	class:CommBuf
+buffer	devel/CCGS_module.h	/^    void          *buffer;$/;"	m	struct:ccgs_sockbuf
+ccgs_add_into_queue	ccgs_common.cpp	/^int ccgs_add_into_queue (ccgs_sockbuf_t *skbuf, unsigned int mid)$/;"	f
+ccgs_get_socket_descriptor	ccgs_common.cpp	/^int ccgs_get_socket_descriptor (const ccgs_sockbuf_t *skbuf)$/;"	f
+ccgs_header	devel/CCGS_proto.h	/^typedef struct ccgs_header {$/;"	s
+ccgs_header_t	devel/CCGS_proto.h	/^}ccgs_header_t;$/;"	t	typeref:struct:ccgs_header
+ccgs_module	devel/CCGS_module.h	/^typedef struct ccgs_module {$/;"	s
+ccgs_module_handler	devel/sample.c	/^static int ccgs_module_handler (ccgs_module_t *mod, ccgs_sockbuf_t *skbuf)$/;"	f	file:
+ccgs_module_load	devel/sample.c	/^static int ccgs_module_load (ccgs_module_t *mod, unsigned int mid)$/;"	f	file:
+ccgs_module_t	devel/CCGS_module.h	/^}ccgs_module_t;$/;"	t	typeref:struct:ccgs_module
+ccgs_module_unload	devel/sample.c	/^static void ccgs_module_unload (ccgs_module_t *mod)$/;"	f	file:
+ccgs_recv_data	ccgs_common.cpp	/^unsigned int ccgs_recv_data (int skfd,$/;"	f
+ccgs_send_data	ccgs_common.cpp	/^unsigned int ccgs_send_data (int skfd,$/;"	f
+ccgs_set_socket_descriptor	ccgs_common.cpp	/^void ccgs_set_socket_descriptor (const ccgs_sockbuf_t *skbuf, int sock)$/;"	f
+ccgs_sockbuf	devel/CCGS_module.h	/^typedef struct ccgs_sockbuf {$/;"	s
+ccgs_sockbuf_alloc	ccgs_common.cpp	/^ccgs_sockbuf_t *ccgs_sockbuf_alloc (unsigned int size)$/;"	f
+ccgs_sockbuf_free	ccgs_common.cpp	/^void ccgs_sockbuf_free (ccgs_sockbuf_t *skbuf)$/;"	f
+ccgs_sockbuf_t	devel/CCGS_module.h	/^}ccgs_sockbuf_t;$/;"	t	typeref:struct:ccgs_sockbuf
+clientcount	ccgs_event_loop.cpp	/^CAtomic<int> CEvLoop::clientcount;$/;"	m	class:CEvLoop	file:
+clientcount	ccgs_event_loop.h	/^        static CAtomic<int> clientcount;$/;"	m	class:CEvLoop
+cond	ccgs_common_queue.h	/^    pthread_cond_t  cond;$/;"	m	class:CQueue
+cond	ccgs_thread_mutex.h	/^        pthread_cond_t cond;$/;"	m	class:CCondition
+config	ccgs_configure.cpp	/^Config* Config::config = NULL;$/;"	m	class:Config	file:
+config	ccgs_configure.h	/^        static class Config *config;$/;"	m	class:Config	typeref:class:Config::Config
+count	ccgs_thread_pool.h	/^        int                 count;$/;"	m	class:CThreadPool
+dataPtr	ccgs_common_buffer.h	/^	void*   dataPtr;$/;"	m	class:CommBuf
+data_length	devel/CCGS_module.h	/^    unsigned int  data_length;$/;"	m	struct:ccgs_sockbuf
+db_database	ccgs_configure.h	/^        string db_database;$/;"	m	class:Config
+db_host	ccgs_configure.h	/^	string db_host;$/;"	m	class:Config
+db_password	ccgs_configure.h	/^        string db_password;$/;"	m	class:Config
+db_username	ccgs_configure.h	/^        string db_username;$/;"	m	class:Config
+ev_in_info	ccgs_event_loop.h	/^}   ev_in_info;$/;"	t	typeref:struct:ev_io_info
+ev_io_info	ccgs_event_loop.h	/^typedef struct ev_io_info$/;"	s
+exitOfFinish	ccgs_thread_task.h	/^        bool exitOfFinish;$/;"	m	class:threadTask
+fileLock	ccgs_manager.h	/^        int          fileLock;$/;"	m	class:CManager
+flags	devel/CCGS_proto.h	/^    unsigned short flags;$/;"	m	struct:ccgs_header
+free	ccgs_thread_pool.h	/^        CAtomic <int>       free;$/;"	m	class:CThreadPool
+getConnection	ccgs_db_connection.cpp	/^Connection* DataBase::getConnection ()$/;"	f	class:DataBase
+getInstance	ccgs_memcached.cpp	/^CMemcached* CMemcached::getInstance ()$/;"	f	class:CMemcached
+getMBufferQueue	ccgs_module.cpp	/^CQueue<void*> *CModuleManager::getMBufferQueue (unsigned int mid)$/;"	f	class:CModuleManager
+getModule	ccgs_module.cpp	/^CModule* CModuleManager::getModule (unsigned int id)$/;"	f	class:CModuleManager
+getStatement	ccgs_db_connection.cpp	/^Statement* DataBase::getStatement ()$/;"	f	class:DataBase
+handle	ccgs_protocol_handler.h	/^    static void handle (CommBuf *buf) {$/;"	f	class:CProtocolHandler
+hash_buf_queue	ccgs_module.h	/^    ST_hash_t  hash_buf_queue;$/;"	m	class:CModuleManager
+hash_by_id	ccgs_module.h	/^    ST_hash_t  hash_by_id;$/;"	m	class:CModuleManager
+hash_compare_by_id	ccgs_module.cpp	/^static BOOL hash_compare_by_id (void *data, void *key)$/;"	f	file:
+hash_destroy	ccgs_module.cpp	/^static void hash_destroy (void *data)$/;"	f	file:
+hash_index_by_id	ccgs_module.cpp	/^static unsigned int hash_index_by_id (void *key)$/;"	f	file:
+header	devel/CCGS_module.h	/^    ccgs_header_t *header;$/;"	m	struct:ccgs_sockbuf
+identifier	devel/CCGS_proto.h	/^    unsigned char identifier[4];$/;"	m	struct:ccgs_header
+init	ccgs_module.cpp	/^bool CModuleManager::init ()$/;"	f	class:CModuleManager
+insert	ccgs_memcached.cpp	/^int CMemcached::insert (const char* key, const char* value, time_t expiration, uint32_t flags)$/;"	f	class:CMemcached
+instance	ccgs_db_connection.cpp	/^DataBase* DataBase::instance ()$/;"	f	class:DataBase
+instance	ccgs_module.cpp	/^CModuleManager* CModuleManager::instance = NULL;$/;"	m	class:CModuleManager	file:
+instance	ccgs_module.h	/^    static class CModuleManager *instance;    $/;"	m	class:CModuleManager	typeref:class:CModuleManager::CModuleManager
+instance	ccgs_singleton.cpp	/^Singleton* Singleton::instance = NULL;$/;"	m	class:Singleton	file:
+instance	ccgs_singleton.h	/^        static class Singleton* instance;$/;"	m	class:Singleton	typeref:class:Singleton::Singleton
+intrptr	devel/CCGS_module.h	/^    const void *intrptr;$/;"	m	struct:ccgs_sockbuf
+io	ccgs_event_loop.h	/^    struct ev_io* io;$/;"	m	struct:ev_io_info	typeref:struct:ev_io_info::ev_io
+ioarray	ccgs_event_loop.cpp	/^struct ev_io_info CEvLoop::ioarray[MAXFD];$/;"	m	class:CEvLoop	typeref:struct:CEvLoop::	file:
+ioarray	ccgs_event_loop.h	/^        static struct ev_io_info ioarray[MAXFD];$/;"	m	class:CEvLoop	typeref:struct:CEvLoop::ev_io_info
+lasttime	ccgs_event_loop.h	/^    ev_tstamp lasttime;$/;"	m	struct:ev_io_info
+length	ccgs_common.cpp	/^    unsigned int length;$/;"	m	struct:msg_header	file:
+length	devel/CCGS_proto.h	/^    unsigned int   length;$/;"	m	struct:ccgs_header
+load	ccgs_module.cpp	/^bool CModule::load (string name, unsigned int id)$/;"	f	class:CModule
+load	ccgs_module.cpp	/^bool CModuleManager::load (string modcfg)$/;"	f	class:CModuleManager
+lock	ccgs_atomic.h	/^        CMutex  lock;$/;"	m	class:CAtomic
+loop	ccgs_event_loop.cpp	/^struct ev_loop* CEvLoop::loop = NULL;$/;"	m	class:CEvLoop	typeref:struct:CEvLoop::	file:
+loop	ccgs_event_loop.h	/^        static struct ev_loop* loop;$/;"	m	class:CEvLoop	typeref:struct:CEvLoop::ev_loop
+m_database	ccgs_db_connection.h	/^        string m_database;$/;"	m	class:DataBase
+m_handle	ccgs_module.h	/^    void *m_handle;$/;"	m	class:CModule
+m_host	ccgs_db_connection.h	/^        string m_host;$/;"	m	class:DataBase
+m_id	ccgs_module.h	/^    unsigned int m_id;$/;"	m	class:CModule
+m_ip	ccgs_event_loop.h	/^        string m_ip;$/;"	m	class:CEvLoop
+m_listenfd	ccgs_event_loop.h	/^        int    m_listenfd;$/;"	m	class:CEvLoop
+m_module	ccgs_module.h	/^    ccgs_module_t *m_module;$/;"	m	class:CModule
+m_name	ccgs_module.h	/^    string m_name;$/;"	m	class:CModule
+m_pConn	ccgs_db_connection.h	/^        Connection* m_pConn;$/;"	m	class:DataBase
+m_pDriver	ccgs_db_connection.h	/^        Driver* m_pDriver;$/;"	m	class:DataBase
+m_password	ccgs_db_connection.h	/^        string m_password;$/;"	m	class:DataBase
+m_port	ccgs_event_loop.h	/^        int    m_port;$/;"	m	class:CEvLoop
+m_user_name	ccgs_db_connection.h	/^        string m_user_name;$/;"	m	class:DataBase
+main	ccgs.cpp	/^int main (int argc, char** argv)$/;"	f
+mc_port	ccgs_configure.h	/^        int mc_port;$/;"	m	class:Config
+mc_server	ccgs_configure.h	/^        string mc_server;$/;"	m	class:Config
+memPool	ccgs_singleton.h	/^        CMemPool<CommBuf>  memPool;$/;"	m	class:Singleton
+memc	ccgs_memcached.h	/^        memcached_st* memc;$/;"	m	class:CMemcached
+mod_handler	devel/CCGS_module.h	/^    int (*mod_handler)(struct ccgs_module*, ccgs_sockbuf_t *buf);$/;"	m	struct:ccgs_module
+mod_load	devel/CCGS_module.h	/^    int (*mod_load)(struct ccgs_module*, unsigned int);$/;"	m	struct:ccgs_module
+mod_private	devel/CCGS_module.h	/^    void         *mod_private;$/;"	m	struct:ccgs_module
+mod_unload	devel/CCGS_module.h	/^    void (*mod_unload)(struct ccgs_module*);$/;"	m	struct:ccgs_module
+mod_version	devel/CCGS_module.h	/^    unsigned int mod_version;$/;"	m	struct:ccgs_module
+moduleManager	ccgs_singleton.h	/^        CModuleManager   moduleManager;$/;"	m	class:Singleton
+module_list	ccgs_configure.h	/^        string module_list;$/;"	m	class:Config
+msg_header	ccgs_common.cpp	/^struct msg_header {$/;"	s	file:
+mutex	ccgs_common_queue.h	/^    pthread_mutex_t mutex;$/;"	m	class:CQueue
+mutex	ccgs_db_connection.h	/^        CMutex mutex;$/;"	m	class:DataBase
+mutex	ccgs_thread_mutex.h	/^        CMutex&        mutex;$/;"	m	class:CCondition
+mutex	ccgs_thread_mutex.h	/^        CMutex& mutex;$/;"	m	class:CGuard
+mutex	ccgs_thread_mutex.h	/^        pthread_mutex_t mutex;$/;"	m	class:CMutex
+mutexLock	ccgs_mem_pool.h	/^    CMutex mutexLock;$/;"	m	class:CMemPool
+operator !=	ccgs_atomic.h	/^        bool operator!= (TYPE a) $/;"	f	class:CAtomic
+operator ++	ccgs_atomic.h	/^        TYPE operator++ (int)   \/\/ parameter must is int type$/;"	f	class:CAtomic
+operator ++	ccgs_atomic.h	/^        TYPE operator++ (void)$/;"	f	class:CAtomic
+operator +=	ccgs_atomic.h	/^        TYPE operator+= (TYPE a)$/;"	f	class:CAtomic
+operator --	ccgs_atomic.h	/^        TYPE operator-- (int)  \/\/ parameter must is int type$/;"	f	class:CAtomic
+operator --	ccgs_atomic.h	/^        TYPE operator-- (void)$/;"	f	class:CAtomic
+operator -=	ccgs_atomic.h	/^        TYPE operator-= (TYPE a)$/;"	f	class:CAtomic
+operator <	ccgs_atomic.h	/^        bool operator< (TYPE a)$/;"	f	class:CAtomic
+operator <=	ccgs_atomic.h	/^        bool operator<= (TYPE a)$/;"	f	class:CAtomic
+operator =	ccgs_atomic.h	/^        CAtomic<TYPE>& operator= (TYPE a)$/;"	f	class:CAtomic
+operator =	ccgs_common_buffer.h	/^	CommBuf& operator= (CommBuf& rhs)$/;"	f	class:CommBuf
+operator ==	ccgs_atomic.h	/^        bool operator== (TYPE a)$/;"	f	class:CAtomic
+operator >	ccgs_atomic.h	/^        bool operator> (TYPE a)$/;"	f	class:CAtomic
+operator >=	ccgs_atomic.h	/^        bool operator>= (TYPE a)$/;"	f	class:CAtomic
+pInstance	ccgs_memcached.h	/^        static CMemcached* pInstance;$/;"	m	class:CMemcached
+pinstance	ccgs_db_connection.cpp	/^DataBase* DataBase::pinstance = NULL;$/;"	m	class:DataBase	file:
+pinstance	ccgs_db_connection.h	/^        static DataBase *pinstance;$/;"	m	class:DataBase
+preStatement	ccgs_db_connection.cpp	/^PreparedStatement* DataBase::preStatement (string sql)$/;"	f	class:DataBase
+recvQueue	ccgs_singleton.h	/^        CQueue<CommBuf*> recvQueue;$/;"	m	class:Singleton
+recv_n	ccgs_utils.c	/^ssize_t recv_n (int fd, void* pdata, ssize_t left, struct timeval* timeout)$/;"	f
+recv_v	ccgs_utils.c	/^int recv_v (int fd, void* pdata, ssize_t left)$/;"	f
+removeModule	ccgs_module.cpp	/^void CModuleManager::removeModule (unsigned int id)$/;"	f	class:CModuleManager
+reserved	ccgs_common.cpp	/^    unsigned int reserved;$/;"	m	struct:msg_header	file:
+select	ccgs_memcached.cpp	/^string CMemcached::select (const char* key)$/;"	f	class:CMemcached
+sendQueue	ccgs_singleton.h	/^        CQueue<CommBuf*> sendQueue;$/;"	m	class:Singleton
+send_n	ccgs_utils.c	/^ssize_t send_n (int fd, void* pdata, ssize_t left, struct timeval* timeout)$/;"	f
+send_v	ccgs_utils.c	/^int send_v (int fd, void* pdata, ssize_t left)$/;"	f
+server_ip	ccgs_configure.h	/^        string server_ip;$/;"	m	class:Config
+server_port	ccgs_configure.h	/^        int server_port;$/;"	m	class:Config
+sharedInstance	ccgs_module.cpp	/^CModuleManager *CModuleManager::sharedInstance ()$/;"	f	class:CModuleManager
+size	ccgs_mem_pool.h	/^    int size;$/;"	m	class:CMemPool
+size	devel/CCGS_module.h	/^    unsigned int  size;$/;"	m	struct:ccgs_sockbuf
+socketFd	ccgs_common_buffer.h	/^	int     socketFd;$/;"	m	class:CommBuf
+state	ccgs_thread_pool.h	/^        CAtomic <int>       state;$/;"	m	class:CThreadPool
+status	devel/CCGS_proto.h	/^    unsigned short status;$/;"	m	struct:ccgs_header
+taskQueue	ccgs_thread_pool.h	/^        CQueue<threadTask*> taskQueue;$/;"	m	class:CThreadPool
+threadList	ccgs_thread_pool.h	/^        list<pthread_t>     threadList;$/;"	m	class:CThreadPool
+threadLock	ccgs_thread_pool.h	/^        CMutex              threadLock;$/;"	m	class:CThreadPool
+threadPool	ccgs_manager.h	/^        CThreadPool* threadPool;$/;"	m	class:CManager
+threadTask	ccgs_thread_task.h	/^        threadTask () : exitOfFinish (true)$/;"	f	class:threadTask
+threadTask	ccgs_thread_task.h	/^class threadTask$/;"	c
+typeQueue	ccgs_common_queue.h	/^    queue<TYPE>     typeQueue;$/;"	m	class:CQueue
+uninit	ccgs_module.cpp	/^void CModuleManager::uninit ()$/;"	f	class:CModuleManager
+unload	ccgs_module.cpp	/^void CModule::unload ()$/;"	f	class:CModule
+unload	ccgs_module.cpp	/^void CModuleManager::unload ()$/;"	f	class:CModuleManager
+usedSize	ccgs_common_buffer.h	/^	size_t  usedSize;$/;"	m	class:CommBuf
+value	ccgs_atomic.h	/^        TYPE    value;$/;"	m	class:CAtomic
+~CAtomic	ccgs_atomic.h	/^        ~CAtomic()$/;"	f	class:CAtomic
+~CCondition	ccgs_thread_mutex.h	/^        ~CCondition ()$/;"	f	class:CCondition
+~CEvLoop	ccgs_event_loop.cpp	/^CEvLoop::~CEvLoop ()$/;"	f	class:CEvLoop
+~CGuard	ccgs_thread_mutex.h	/^        ~CGuard ()$/;"	f	class:CGuard
+~CManager	ccgs_manager.cpp	/^CManager::~CManager ()$/;"	f	class:CManager
+~CMemPool	ccgs_mem_pool.h	/^    ~CMemPool ()$/;"	f	class:CMemPool
+~CMemcached	ccgs_memcached.cpp	/^CMemcached::~CMemcached ()$/;"	f	class:CMemcached
+~CModule	ccgs_module.cpp	/^CModule::~CModule ()$/;"	f	class:CModule
+~CModuleManager	ccgs_module.cpp	/^CModuleManager::~CModuleManager ()$/;"	f	class:CModuleManager
+~CMutex	ccgs_thread_mutex.h	/^        ~CMutex ()$/;"	f	class:CMutex
+~CQueue	ccgs_common_queue.h	/^    ~CQueue ()$/;"	f	class:CQueue
+~CThreadPool	ccgs_thread_pool.cpp	/^CThreadPool::~CThreadPool ()$/;"	f	class:CThreadPool
+~CommBuf	ccgs_common_buffer.h	/^	~CommBuf ()$/;"	f	class:CommBuf
+~Config	ccgs_configure.cpp	/^Config::~Config ()$/;"	f	class:Config
+~DataBase	ccgs_db_connection.cpp	/^DataBase::~DataBase ()$/;"	f	class:DataBase
+~RecvTask	ccgs_recv_task.cpp	/^RecvTask::~RecvTask ()$/;"	f	class:RecvTask
+~SendTask	ccgs_send_task.cpp	/^SendTask::~SendTask () $/;"	f	class:SendTask
+~Singleton	ccgs_singleton.cpp	/^Singleton::~Singleton ()$/;"	f	class:Singleton
+~threadTask	ccgs_thread_task.h	/^        virtual ~threadTask() {}$/;"	f	class:threadTask

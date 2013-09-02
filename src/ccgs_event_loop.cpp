@@ -132,7 +132,6 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
         return;
     }
 
-    cout << "recv len of header......." << endl;
     //收包头长度
     int i = recv_v (w->fd, buf->Data (), MSG_HEADER_LEN);
     if (MSG_HEADER_LEN != (unsigned int)i)
@@ -144,11 +143,9 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
         return;
     }
 
-    cout << "recv body of message" << endl;
     //收包体
-    //int *p = (int*)buf->Data ();
     int p = *(int*)buf->Data ();
-    cout << "recv len of header=" << p << endl;
+    cout << "packet_size = " << p << endl;
     buf->Reset ();
     i = recv_v (w->fd, (char*)buf->Data (), p - MSG_HEADER_LEN);
 
@@ -162,8 +159,8 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
     }
 
     buf->usedSize = i;
-    cout << (char*)buf->Data () << endl;
-    cout << "push message to queue" << endl;
+    cout << "buf->Data() = " << (char*)buf->Data () << endl;
+    cout << "buf->usedSize = " << buf->usedSize << endl;
     CEvLoop::ioarray[w->fd].lasttime = ev_time ();
     buf->SetSocket (w->fd);
     //将buf压入队列

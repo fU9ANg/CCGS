@@ -15,3 +15,6 @@ Compiling:
         $ mkdir -v build && cd build && cmake ..    ## create directory and auto-create make file
         $ make          ## compile
         $ make clean    ## clean project
+
+Testing&Running:
+        $ ./ccgs -d

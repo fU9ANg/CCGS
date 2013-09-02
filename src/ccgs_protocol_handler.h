@@ -65,6 +65,7 @@ public:
 
                         SINGLETON->sendQueue.InQueue (comBuf);
                         free (sndbuf);
+                        sndbuf = NULL;
                     }
                 } while (sndbuf);
             }

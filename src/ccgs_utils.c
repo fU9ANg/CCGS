@@ -79,10 +79,29 @@ int send_v (int fd, void* pdata, ssize_t left)
         return (-1);
 
     int sended = 0;
-    while (left != 0)
-    {
-        int len = send (fd, pdata + sended, left, 0);
+    int len = 0;
 
+    while (left > 0)
+    {
+        len = send (fd, pdata + sended, left, 0);
+#if 1
+        if (len <= 0)
+        {
+            if (errno == EAGAIN)
+            {
+                if (len < 0) len = 0;
+                continue;
+            }
+            else if (errno == EINTR)
+            {
+                if (len < 0) len = 0;
+                continue;
+            }
+            else {
+                break;
+            }
+        }
+#else
         if (errno == EINTR || errno == EAGAIN)
         {
             usleep (100);
@@ -96,7 +115,7 @@ int send_v (int fd, void* pdata, ssize_t left)
         {
             return (-1);
         }
-
+#endif
         left   -= len;
         sended += len;
     }
@@ -110,10 +129,28 @@ int recv_v (int fd, void* pdata, ssize_t left)
         return (-1);
 
     int recved = 0;
-    while (left != 0)
+    int len = 0;
+    while (left > 0)
     {
-        int len = recv (fd, (char*) pdata + recved, left, 0);
-
+        len = recv (fd, (char*) pdata + recved, left, 0);
+#if 1
+        if (len <= 0)
+        {
+            if (errno == EAGAIN)
+            {
+                if (len < 0) len = 0;
+                continue;
+            }
+            else if (errno == EINTR)
+            {
+                if (len < 0) len = 0;
+                continue;
+            }
+            else {
+                break;
+            }
+        }
+#else
         if (errno == EINTR || errno == EAGAIN)
         {
             usleep (100);
@@ -127,7 +164,7 @@ int recv_v (int fd, void* pdata, ssize_t left)
         {
             return (-1);
         }
-
+#endif
         left   -= len;
         recved += len;
     }

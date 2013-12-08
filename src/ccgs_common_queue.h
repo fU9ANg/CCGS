@@ -6,6 +6,7 @@
 #include <iostream>
 #include <time.h>
 #include <pthread.h>
+#include <sys/time.h>
 
 #include "ccgs_thread_mutex.h"
 
@@ -30,8 +31,8 @@ public:
     int OutQueue (TYPE& out, unsigned int timeout)
     {
         struct timespec t;
-        t.tv_sec = time (NULL) + timeout;
-        t.tv_nsec = 0;
+	clock_gettime(CLOCK_REALTIME, &t);
+        t.tv_nsec += timeout * 1000000;
         pthread_mutex_lock (&mutex);
         while  (typeQueue.empty ()) {
             if  (0 != pthread_cond_timedwait (&cond, &mutex, &t)) {

@@ -1,7 +1,8 @@
 author: sontolau <sonto.lau@gmail.com>
 date:   01/09/2013
 details: {
-    在ccgs_event_loop.cpp中增加宏定义EVENT_POLL，在*BSD系统中定义为EVBACKEND_POLL而在LINUX系统中定义为EVBACKEND_EPOLL,使得该服务器在*nix中编译运行。
+    在ccgs_event_loop.cpp中增加宏定义EVENT_POLL，
+    在*BSD系统中定义为EVBACKEND_POLL而在LINUX系统中定义为EVBACKEND_EPOLL,使得该服务器在*nix中编译运行。
 
 }
 

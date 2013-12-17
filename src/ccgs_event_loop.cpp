@@ -133,7 +133,7 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
     }
 
     //收包头长度
-    int i = recv_v (w->fd, buf->Data (), MSG_HEADER_LEN);
+    int i = recv_n (w->fd, buf->Data (), MSG_HEADER_LEN);
     if (MSG_HEADER_LEN != (unsigned int)i)
     {
         LOG (ERROR) << w->fd << ":recv head error! actually received len = " << i 
@@ -147,7 +147,7 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
     int p = *(int*)buf->Data ();
     cout << "packet_size = " << p << endl;
     buf->Reset ();
-    i = recv_v (w->fd, (char*)buf->Data (), p - MSG_HEADER_LEN);
+    i = recv_n (w->fd, (char*)buf->Data (), p - MSG_HEADER_LEN);
 
     if ((p - MSG_HEADER_LEN) != i)
     {

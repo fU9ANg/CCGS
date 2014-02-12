@@ -63,7 +63,7 @@ typedef struct ccgs_module {
 }ccgs_module_t;
 
 /*
- * the export symbol of each module.
+ * the exported symbol for each module.
  */
 #define CCGS_MODULE_SYMBOL "ccgs_module"
 

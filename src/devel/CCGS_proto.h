@@ -1,7 +1,6 @@
 #ifndef __CCGS_PROTOCOL_H
 #define __CCGS_PROTOCOL_H
 
-#define ECCGS_MODULE_NOT_FOUND 1
 
 #define CCGS_IDENTIFIER "CCGS"
 
@@ -10,7 +9,7 @@ typedef struct ccgs_header {
      * CCGS protocol identifier, the server will test if
      * a packet is correct CCGS data with this identifier.
      */
-    unsigned char identifier[4];
+    unsigned int identifier;
 
     /*
      * the transaction ID, which tells you the response from 

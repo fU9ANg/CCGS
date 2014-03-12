@@ -21,7 +21,7 @@ public:
 
         string mc_server;
         int mc_port;
-
+        unsigned int max_trans_size;
         int server_port;
 private:
 	Config ();

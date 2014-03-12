@@ -50,6 +50,12 @@ void Config::Read (string file)
     lua_getglobal (lua,"db_username");
     db_username = lua_tostring (lua, -1);
 
+    // the data size for transaction, which will
+    // determine if a transaction from client would be
+    // accepted.
+    lua_getglobal (lua, "max_trans_size");
+    max_trans_size = lua_tointeger (lua, -1);
+
     // need passwd for connect mysql
     lua_getglobal (lua,"db_password");
     db_password = lua_tostring (lua, -1);

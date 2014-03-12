@@ -147,6 +147,17 @@ void CEvLoop::RecvCB (struct ev_loop *loop, ev_io *w, int revents)
 
     //收包体
     int p = *(int*)buf->Data ();
+
+    // [sontolau]: test if the size of data exceeds the maximum
+    // transaction value defined in configuration file <max_trans_size>
+    if (p-MSG_HEADER_LEN > CONFIG->max_trans_size) {
+        SINGLETON->memPool.Free (buf);
+        send (w->fd, 
+              ccgs_error_reply (ECCGS_EXCEED_TRANSIZE), 
+              sizeof (SZCCGS),
+              0);
+    }
+
     cout << "packet_size = " << p << endl;
     buf->Reset ();
     i = recv_n (w->fd, (char*)buf->Data (), p - MSG_HEADER_LEN, &to);

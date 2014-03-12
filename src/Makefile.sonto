@@ -16,7 +16,8 @@ CC      = cc
 CFLAGS  = -Wall -Werror -fPIC
 
 # objects
-OBJS    =		ccgs_module.o \
+OBJS    =		ccgs_error.o\
+			ccgs_module.o \
 			ccgs_configure.o \
 			ccgs_event_loop.o  \
 			ccgs_recv_task.o  \

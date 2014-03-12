@@ -6,4 +6,11 @@ details: {
 
 }
 
+author: sontolau <sonto.lau@gmail.com>
+date: 03/12/2014
+details: {
+    1：增加了文件ccgs_error.c与ccgs_error.h，包含了错误信息的定义。
+    2：增加了对交易数据的最大值的设定（max_trans_size），当客户提交的数据大于我们设置的值时，返回ECCGS_EXCEED_TRANSIZE错误(ccgs_error.h).
+}
+
 
